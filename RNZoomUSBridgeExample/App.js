@@ -9,8 +9,17 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import RNZoomUsBridge from 'react-native-zoom-us-bridge';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  NativeEventEmitter
+} from 'react-native';
+
+import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from 'react-native-zoom-us-bridge';
 
 const ZOOM_APP_KEY = "ZOOM_APP_KEY";
 const ZOOM_APP_SECRET = "ZOOM_APP_SECRET";
@@ -22,6 +31,86 @@ export default class App extends Component {
 
   };
   componentDidMount() {
+    const meetingEventEmitter = new NativeEventEmitter(RNZoomUsBridgeEventEmitter);
+
+    if (!this.sdkInitialized) {
+      this.sdkInitialized = meetingEventEmitter.addListener(
+        'SDKInitialized',
+        () => console.log("SDKInitialized")
+      );
+    }
+
+    if (!this.meetingStatusChangedSubscription) {
+      this.meetingStatusChangedSubscription = meetingEventEmitter.addListener(
+        'meetingStatusChanged',
+        (event) => console.log("meetingStatusChanged", event.eventProperty)
+      );
+    }
+
+    if (this.hiddenSubscription === null) {
+      this.hiddenSubscription = meetingEventEmitter.addListener(
+        'meetingSetToHidden',
+        () => console.log("Meeting Hidden")
+      );
+    }
+
+    if (this.endedSubscription === null) {
+      this.endedSubscription = meetingEventEmitter.addListener(
+        'meetingEnded',
+        result => {
+          console.log("Meeting Ended: ", result)
+          if ('error' in result) {
+            Alert.alert(
+              "Error Joining",
+              "One of your inputs is invalid.",
+              [
+                { text: "OK", onPress: () => null }
+              ],
+              { cancelable: false }
+            );
+          }
+        }
+      );
+    }
+
+    if (this.startedSubscription === null) {
+      this.startedSubscription = meetingEventEmitter.addListener(
+        'meetingStarted',
+        result => {
+          console.log("Meeting Started: ", result)
+          if ('error' in result) {
+            Alert.alert(
+              "Error Joining",
+              "One of your inputs is invalid.",
+              [
+                { text: "OK", onPress: () => null }
+              ],
+              { cancelable: false }
+            );
+          }
+        }
+      );
+    }
+
+    if (this.joinedSubscription === null) {
+      this.joinedSubscription = meetingEventEmitter.addListener(
+        'meetingJoined',
+        result => {
+          console.log("Meeting Joined: ", result);
+          if ('error' in result) {
+            Alert.alert(
+              "Error Joining",
+              "One of your inputs is invalid.",
+              [
+                { text: "OK", onPress: () => null }
+              ],
+              { cancelable: false }
+            );
+          }
+        }
+      );
+    }
+
     this.initializeZoomSDK();
   }
 

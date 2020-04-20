@@ -1,5 +1,15 @@
 #import "RNZoomUsBridge.h"
+#import "RNZoomUSBridgeEventEmitter.h"
 
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonHMAC.h>
+
+typedef enum {
+  MobileRTCSampleTokenType_Token,
+  MobileRTCSampleTokenType_ZAK,
+} MobileRTCSampleTokenType;
+
+NSString *const kSDKDomain = @"zoom.us";
 
 @implementation RNZoomUsBridge
 {
@@ -9,6 +19,8 @@
   RCTPromiseResolveBlock meetingPromiseResolve;
   RCTPromiseRejectBlock meetingPromiseReject;
 }
+
+static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
 
 - (instancetype)init {
   if (self = [super init]) {
@@ -36,7 +48,6 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(
   initialize: (NSString *)appKey
   withAppSecret: (NSString *)appSecret
-  withWebDomain: (NSString *)webDomain
   withResolve: (RCTPromiseResolveBlock)resolve
   withReject: (RCTPromiseRejectBlock)reject
 )
@@ -53,7 +64,7 @@ RCT_EXPORT_METHOD(
     initializePromiseReject = reject;
 
     MobileRTCSDKInitContext *context = [MobileRTCSDKInitContext new];
-    [context setDomain:webDomain];
+    [context setDomain:kSDKDomain];
     [context setEnableLog:NO];
     [[MobileRTC sharedRTC] initialize:context];
 
@@ -73,14 +84,12 @@ RCT_EXPORT_METHOD(
 }
 
 RCT_EXPORT_METHOD(
-  startMeeting: (NSString *)displayName
-  withMeetingNo: (NSString *)meetingNo
-  withUserId: (NSString *)userId
-  withUserType: (NSInteger)userType
-  withZoomAccessToken: (NSString *)zoomAccessToken
-  withZoomToken: (NSString *)zoomToken
-  withResolve: (RCTPromiseResolveBlock)resolve
-  withReject: (RCTPromiseRejectBlock)reject
+                  startMeeting:(NSString *)meetingNumber
+                  userName:(NSString *)userName
+                  userId:(NSString *)userId
+                  userZak:(NSString *)userZak
+                  withResolve: (RCTPromiseResolveBlock)resolve
+                  withReject: (RCTPromiseRejectBlock)reject
 )
 {
   @try {
@@ -92,12 +101,12 @@ RCT_EXPORT_METHOD(
       ms.delegate = self;
 
       MobileRTCMeetingStartParam4WithoutLoginUser * params = [[MobileRTCMeetingStartParam4WithoutLoginUser alloc]init];
-      params.userName = displayName;
-      params.meetingNumber = meetingNo;
+      params.userName = userName;
+      params.meetingNumber = meetingNumber;
       params.userID = userId;
-      params.userType = (MobileRTCUserType)userType;
-      params.zak = zoomAccessToken;
-      params.userToken = zoomToken;
+      params.userType = MobileRTCUserType_APIUser;
+      params.zak = userZak;
+        params.userToken = @"null";
 
       MobileRTCMeetError startMeetingResult = [ms startMeetingWithStartParam:params];
       NSLog(@"startMeeting, startMeetingResult=%d", startMeetingResult);
@@ -110,6 +119,7 @@ RCT_EXPORT_METHOD(
 RCT_EXPORT_METHOD(
   joinMeeting: (NSString *)displayName
   withMeetingNo: (NSString *)meetingNo
+  withPassword:(NSString *)password
   withResolve: (RCTPromiseResolveBlock)resolve
   withReject: (RCTPromiseRejectBlock)reject
 )
@@ -124,7 +134,8 @@ RCT_EXPORT_METHOD(
 
       NSDictionary *paramDict = @{
         kMeetingParam_Username: displayName,
-        kMeetingParam_MeetingNumber: meetingNo
+        kMeetingParam_MeetingNumber: meetingNo,
+        kMeetingParam_MeetingPassword: password ? password : @""
       };
 
       MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithDictionary:paramDict];
@@ -137,6 +148,11 @@ RCT_EXPORT_METHOD(
 
 - (void)onMobileRTCAuthReturn:(MobileRTCAuthError)returnValue {
   NSLog(@"SDK LOG - Auth Returned %d", returnValue);
+  RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+
+  NSDictionary *resultDict = returnValue == MobileRTCMeetError_Success ? @{} : @{@"error": @"start_error"};
+  [emitter userSDKInitilized:resultDict];
+
   [[[MobileRTC sharedRTC] getAuthService] setDelegate:self];
   if (returnValue != MobileRTCAuthError_Success)
   {
