@@ -1,5 +1,6 @@
+#import "RNZoomUsManager.h"
 #import "RNZoomUsBridge.h"
-#import "RNZoomUSBridgeEventEmitter.h"
+#import "RNZoomUsBridgeEventEmitter.h"
 
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
@@ -8,8 +9,6 @@ typedef enum {
   MobileRTCSampleTokenType_Token,
   MobileRTCSampleTokenType_ZAK,
 } MobileRTCSampleTokenType;
-
-NSString *const kSDKDomain = @"zoom.us";
 
 @implementation RNZoomUsBridge
 {
@@ -63,21 +62,12 @@ RCT_EXPORT_METHOD(
     initializePromiseResolve = resolve;
     initializePromiseReject = reject;
 
-    MobileRTCSDKInitContext *context = [MobileRTCSDKInitContext new];
-    [context setDomain:kSDKDomain];
-    [context setEnableLog:NO];
-    [[MobileRTC sharedRTC] initialize:context];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      [[RNZoomUsManager sharedInstance] authenticate:appKey appSecret:appSecret completion:^(NSUInteger resultCode) {
+        resolve(@{});
+      }];
+    }];
 
-    MobileRTCAuthService *authService = [[MobileRTC sharedRTC] getAuthService];
-    if (authService)
-    {
-      authService.delegate = self;
-      authService.clientKey = appKey;
-      authService.clientSecret = appSecret;
-      [authService sdkAuth];
-    } else {
-      NSLog(@"onZoomSDKInitializeResult, no authService");
-    }
   } @catch (NSError *ex) {
       reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing initialize", ex);
   }
@@ -96,29 +86,23 @@ RCT_EXPORT_METHOD(
     meetingPromiseResolve = resolve;
     meetingPromiseReject = reject;
 
-    MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
-    if (ms) {
-      ms.delegate = self;
-
-      MobileRTCMeetingStartParam4WithoutLoginUser * params = [[MobileRTCMeetingStartParam4WithoutLoginUser alloc]init];
-      params.userName = userName;
-      params.meetingNumber = meetingNumber;
-      params.userID = userId;
-      params.userType = MobileRTCUserType_APIUser;
-      params.zak = userZak;
-        params.userToken = @"null";
-
-      MobileRTCMeetError startMeetingResult = [ms startMeetingWithStartParam:params];
-      NSLog(@"startMeeting, startMeetingResult=%d", startMeetingResult);
-    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      [[RNZoomUsManager sharedInstance] startMeeting:meetingNumber userName:userName userId:userId userZak:userZak completion:^(NSUInteger resultCode) {
+        if (resultCode == 0) {
+          resolve(@{ @"result": @"success" });
+        } else {
+          resolve(@{ @"result": @"error" });
+        }
+      }];
+    }];
   } @catch (NSError *ex) {
       reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing startMeeting", ex);
   }
 }
 
 RCT_EXPORT_METHOD(
-  joinMeeting: (NSString *)displayName
-  withMeetingNo: (NSString *)meetingNo
+  joinMeeting: (NSString *)userName
+  withMeetingNo: (NSString *)meetingNumber
   withPassword:(NSString *)password
   withResolve: (RCTPromiseResolveBlock)resolve
   withReject: (RCTPromiseRejectBlock)reject
@@ -128,36 +112,29 @@ RCT_EXPORT_METHOD(
     meetingPromiseResolve = resolve;
     meetingPromiseReject = reject;
 
-    MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
-    if (ms) {
-      ms.delegate = self;
-
-      NSDictionary *paramDict = @{
-        kMeetingParam_Username: displayName,
-        kMeetingParam_MeetingNumber: meetingNo,
-        kMeetingParam_MeetingPassword: password ? password : @""
-      };
-
-      MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithDictionary:paramDict];
-      NSLog(@"joinMeeting, joinMeetingResult=%d", joinMeetingResult);
-    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      [[RNZoomUsManager sharedInstance] joinMeeting:meetingNumber userName:userName password:password completion:^(NSUInteger resultCode) {
+        resolve(@{});
+      }];
+    }];
   } @catch (NSError *ex) {
       reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing joinMeeting", ex);
   }
 }
 
-- (void)onMobileRTCAuthReturn:(MobileRTCAuthError)returnValue {
-  NSLog(@"SDK LOG - Auth Returned %d", returnValue);
-  RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
-
-  NSDictionary *resultDict = returnValue == MobileRTCMeetError_Success ? @{} : @{@"error": @"start_error"};
-  [emitter userSDKInitilized:resultDict];
-
-  [[[MobileRTC sharedRTC] getAuthService] setDelegate:self];
-  if (returnValue != MobileRTCAuthError_Success)
-  {
-    NSLog(@"SDK LOG - Auth Error'd %d", returnValue);
+RCT_EXPORT_METHOD(createJWT: (NSString *)jwtApiKey
+                  withApiSecret: (NSString *)jwtApiSecret
+                  withResolve: (RCTPromiseResolveBlock)resolve
+                  withReject: (RCTPromiseRejectBlock)reject
+) {
+  @try {
+    NSString *accessToken = [self createJWTAccessToken: jwtApiKey withApisecret: jwtApiSecret];
+    NSLog(@"createJWT token success @%@", accessToken);
+    resolve(accessToken);
+  } @catch (NSError *ex) {
+    NSLog(@"ERR_UNEXPECTED_EXCEPTION @%@", ex);
   }
+
 }
 
 - (void)onMeetingReturn:(MobileRTCMeetError)errorCode internalError:(NSInteger)internalErrorCode {
@@ -211,6 +188,88 @@ RCT_EXPORT_METHOD(
 
   meetingPromiseResolve = nil;
   meetingPromiseReject = nil;
+}
+
+/*
+ * Request User Token Or ZAK Via Rest API
+ * Rest API(List User): https://api.zoom.us/v2/users
+ */
+
+- (NSString *)dictionaryToJson:(NSMutableDictionary *)dict
+{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString;
+    if (jsonData == nil)
+    {
+        return nil;
+    }
+    else
+    {
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+
+    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
+    NSRange range = {0,jsonString.length};
+    [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
+    NSRange range2 = {0,mutStr.length};
+    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
+    return mutStr;
+}
+
+- (NSString *)base64Encode:(NSString*)decodeString
+{
+    NSData *encodeData = [decodeString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64String = [encodeData base64EncodedStringWithOptions:0];
+
+    NSMutableString *mutStr = [NSMutableString stringWithString:base64String];
+    NSRange range = {0,base64String.length};
+    [mutStr replaceOccurrencesOfString:@"=" withString:@"" options:NSLiteralSearch range:range];
+
+    return mutStr;
+}
+
+/*
+ * Hmac AlgSHA256 Encryption.
+ */
+- (NSString *)hmac:(NSString *)plaintext withKey:(NSString *)key
+{
+    const char *cKey  = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cData = [plaintext cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    NSString * hash = [HMAC base64Encoding];
+    return hash;
+}
+
+/*
+ * Create JSON Web Tokens (JWT) for Authentication.
+ * Guide Link: https://zoom.github.io/api/#authentication
+ */
+- (NSString *)createJWTAccessToken:(NSString *)apikey withApisecret:(NSString *)apisecret
+{
+
+  NSMutableDictionary *dictHeader = [NSMutableDictionary dictionary];
+  [dictHeader setValue:@"HS256" forKey:@"alg"];
+  [dictHeader setValue:@"JWT" forKey:@"typ"];
+  NSString *base64Header = [self base64Encode:[self dictionaryToJson:dictHeader]];
+
+  //    {
+  //        "iss": "API_KEY",
+  //        "exp": 1496091964000
+  //    }
+  NSMutableDictionary *dictPayload = [NSMutableDictionary dictionary];
+  [dictPayload setValue:apikey forKey:@"iss"];
+  [dictPayload setValue:@"123456789101" forKey:@"exp"];
+  NSString *base64Payload = [self base64Encode:[self dictionaryToJson:dictPayload]];
+
+  NSString *composer = [NSString stringWithFormat:@"%@.%@",base64Header,base64Payload];
+  NSString *hashmac = [self hmac:composer withKey:apisecret];
+
+  NSString *accesstoken = [NSString stringWithFormat:@"%@.%@.%@",base64Header,base64Payload,hashmac];
+    NSLog(@"createJWTAccessToken, accesstoken=%@", accesstoken);
+  return accesstoken;
 }
 
 @end

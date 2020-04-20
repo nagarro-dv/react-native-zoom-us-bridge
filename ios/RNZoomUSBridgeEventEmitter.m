@@ -6,7 +6,7 @@
 //  Copyright © 2020 Facebook. All rights reserved.
 //
 
-#import "RNZoomUSBridgeEventEmitter.h"
+#import "RNZoomUsBridgeEventEmitter.h"
 
 @implementation RNZoomUsBridgeEventEmitter
 {
