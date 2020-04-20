@@ -12,9 +12,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
-const ZOOM_APP_KEY = "0pwMOPLd6vyl6a4mFo3ZMs10uy90TGKIw0c2";
-const ZOOM_APP_SECRET = "j4zdEbKiLgktXxCLAh1SRIrsydFUJ2JjDaeL";
-const ZOOM_APP_DOMAIN = "zoom.us";
+const ZOOM_APP_KEY = "ZOOM_APP_KEY";
+const ZOOM_APP_SECRET = "ZOOM_APP_SECRET";
 
 export default class App extends Component {
   state = {
@@ -28,12 +27,11 @@ export default class App extends Component {
 
   initializeZoomSDK = () => {
 
-    if (!ZOOM_APP_KEY || !ZOOM_APP_SECRET || !ZOOM_APP_DOMAIN) return false;
+    if (!ZOOM_APP_KEY || !ZOOM_APP_SECRET) return false;
     // init sdk
     RNZoomUsBridge.initialize(
       ZOOM_APP_KEY,
       ZOOM_APP_SECRET,
-      ZOOM_APP_DOMAIN
     ).then().catch((err) => {
       console.warn(err);
       Alert.alert('error!', err.message)

@@ -29,6 +29,9 @@ build/
 .gradle
 local.properties
 *.iml
+.aar
+commonlib/
+mobilertc/
 
 # node.js
 #
