@@ -21,22 +21,37 @@ import {
 
 import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from 'react-native-zoom-us-bridge';
 
-const ZOOM_APP_KEY = "ZOOM_APP_KEY";
-const ZOOM_APP_SECRET = "ZOOM_APP_SECRET";
+const ZOOM_APP_KEY = "";
+const ZOOM_APP_SECRET = "";
+const ZOOM_JWT_APP_KEY = "";
+const ZOOM_JWT_APP_SECRET = "";
 
 export default class App extends Component {
   state = {
     meetingId: '',
+    meetingPassword: '',
+    meetingTitle: '',
     userName: '',
-
+    userEmail: '',
+    userId: '',
+    accessToken: '',
+    userZoomAccessToken: '',
+    meetingCreated: false,
+    view: 'select',
   };
+
   componentDidMount() {
     const meetingEventEmitter = new NativeEventEmitter(RNZoomUsBridgeEventEmitter);
 
     if (!this.sdkInitialized) {
       this.sdkInitialized = meetingEventEmitter.addListener(
         'SDKInitialized',
-        () => console.log("SDKInitialized")
+        () => {
+          console.log("SDKInitialized");
+
+          // lets also get access token
+          this.createAccessToken();
+        }
       );
     }
 
@@ -117,6 +132,7 @@ export default class App extends Component {
   initializeZoomSDK = () => {
 
     if (!ZOOM_APP_KEY || !ZOOM_APP_SECRET) return false;
+
     // init sdk
     RNZoomUsBridge.initialize(
       ZOOM_APP_KEY,
@@ -129,44 +145,289 @@ export default class App extends Component {
 
   joinMeeting = async () => {
     const {
-      meetingId, userName
+      meetingId, userName, meetingPassword
     } = this.state;
 
-    if (!meetingId || !userName) return false;
+    if (!meetingId || !userName || !meetingPassword) return false;
 
     RNZoomUsBridge.joinMeeting(
+      String(meetingId),
       userName,
-      meetingId
+      meetingPassword,
     ).then().catch((err) => {
       console.warn(err);
       Alert.alert('error!', err.message)
     });
   }
+
+  createAccessToken = async () => {
+    // to talk to ZOOM API you will need access token
+    if (!ZOOM_JWT_APP_KEY || !ZOOM_JWT_APP_SECRET) return false;
+    const accessToken = await RNZoomUsBridge.createJWT(ZOOM_JWT_APP_KEY, ZOOM_JWT_APP_SECRET).then().catch((err) => console.log(err));
+
+    console.log(`createAccessToken ${accessToken}`);
+
+    if (accessToken) this.setState({accessToken});
+
+  }
+
+  getUserID = async (userEmail, accessToken) => {
+
+    const fetchURL = `https://api.zoom.us/v2/users/${userEmail}`
+    const userResult = await fetch(fetchURL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => response.json())
+    .then((json) => {
+      return json;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    console.log('userResult', userResult);
+
+
+    if (userResult && userResult.code === 429) {
+      // rate error try again later
+      Alert.alert('API Rate error try again in a few seconds');
+    }
+
+    if (userResult && userResult.id && userResult.status === 'active') {
+      // set user id
+      const { id: userId } = userResult;
+
+      this.setState({userId});
+
+      return userId;
+    }
+
+    return false;
+  }
+
+  createUserZAK = async (userId, accessToken) => {
+
+    const fetchURL = `https://api.zoom.us/v2/users/${userId}/token?type=zak`
+    const userZAKResult = await fetch(fetchURL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => response.json())
+    .then((json) => {
+      return json;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    console.log('userZAKResult', userZAKResult);
+
+    if (userZAKResult && userZAKResult.code === 429) {
+      // rate error try again later
+      Alert.alert('API Rate error try again in a few seconds');
+    }
+
+    if (userZAKResult && userZAKResult.token) {
+      // set user id
+      const { token } = userZAKResult;
+
+      this.setState({
+        userZoomAccessToken: token,
+      });
+
+      return token;
+
+    }
+
+    return false;
+  }
+
+  createMeeting = async () => {
+    const { accessToken, userEmail, meetingTitle } = this.state;
+    if (!accessToken || !meetingTitle || !userEmail) return false;
+
+    // user ID is pulled from jwt end point using the email address
+    const userId = await this.getUserID(userEmail, accessToken);
+
+    if (userId) {
+      // user zak is needed to create meeting
+      const userZAK = await this.createUserZAK(userId, accessToken);
+
+      if (userZAK) {
+        // use api to create meeting
+
+        const fetchURL = `https://api.zoom.us/v2/users/${userId}/meetings`
+        const createMeetingResult = await fetch(fetchURL, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            topic: meetingTitle,
+            type: 1,
+            duration: 30,
+            password: "123456",
+            settings: {
+              waiting_room: false,
+              registrants_confirmation_email: false,
+              audio: 'voip',
+            }
+          }),
+        }).then((response) => response.json())
+        .then((json) => {
+          return json;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+        console.log('createMeetingResult', createMeetingResult);
+
+        if (createMeetingResult && createMeetingResult.code === 429) {
+          // rate error try again later
+          Alert.alert('API Rate error try again in a few seconds');
+        }
+
+        if (createMeetingResult && createMeetingResult.id) {
+          const {id, password} = createMeetingResult;
+          this.setState({
+            meetingId: id,
+            meetingPassword: password,
+            meetingCreated: true,
+          });
+        }
+      }
+    }
+  }
+
+  startMeeting = async () => {
+    const {
+      meetingId,
+      userId,
+      userZoomAccessToken,
+    } = this.state;
+
+    if (!meetingId || !userId || !userZoomAccessToken) return false;
+
+    await RNZoomUsBridge.startMeeting(
+      String(meetingId),
+      'username', // ignored, start meeting will use user details of userZoomAccessToken
+      userId, // can be 'null'?
+      userZoomAccessToken, // zak token
+    );
+
+  }
+
+  viewJoin = () => this.setState({view: 'join'});
+
+  viewHost = () => this.setState({view: 'host'});
+
   render() {
     const {
-      meetingId, userName
+      meetingId, userName, meetingCreated, userEmail, accessToken, meetingTitle, meetingPassword, view,
     } = this.state;
 
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>☆RNZoomUsBridge example☆</Text>
-        <TextInput
-          value={meetingId}
-          placeholder="Meeting ID"
-          onChangeText={(text) => this.setState({meetingId: text})}
-          style={styles.input}
-        />
-        <TextInput
-          value={userName}
-          placeholder="Your name"
-          onChangeText={(text) => this.setState({userName: text})}
-          style={styles.input}
-        />
-        <TouchableOpacity onPress={this.joinMeeting} style={styles.button}>
-          <Text style={styles.buttonText}>
-            Join Meeting
-          </Text>
-        </TouchableOpacity>
+        {!ZOOM_APP_KEY || !ZOOM_APP_SECRET ? (
+          <Text style={styles.welcome}>ZOOM_APP_KEY and ZOOM_APP_SECRET must be set</Text>
+        ) : null}
+        {!ZOOM_JWT_APP_KEY || !ZOOM_JWT_APP_SECRET ? (
+          <Text style={styles.welcome}>optional ZOOM_JWT_APP_KEY and ZOOM_JWT_APP_SECRET must be set to host meetings</Text>
+        ) : null}
+        {view === 'select' ? (
+          <>
+            <TouchableOpacity onPress={this.viewJoin} style={styles.button}>
+              <Text style={styles.buttonText}>
+                Join a Meeting
+              </Text>
+            </TouchableOpacity>
+            {accessToken ? (
+              <TouchableOpacity onPress={this.viewHost} style={styles.button}>
+                <Text style={styles.buttonText}>
+                  Host a Meeting
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+          </>
+        ) : null}
+        {view === 'join' ? (
+          <>
+            <TextInput
+              value={meetingId}
+              placeholder="Meeting ID"
+              onChangeText={(text) => this.setState({meetingId: text})}
+              style={styles.input}
+            />
+            <TextInput
+              value={meetingPassword}
+              placeholder="Meeting Password"
+              onChangeText={(text) => this.setState({meetingPassword: text})}
+              style={styles.input}
+            />
+            <TextInput
+              value={userName}
+              placeholder="Your name"
+              onChangeText={(text) => this.setState({userName: text})}
+              style={styles.input}
+            />
+            <TouchableOpacity onPress={this.joinMeeting} style={styles.button}>
+              <Text style={styles.buttonText}>
+                Join Meeting
+              </Text>
+            </TouchableOpacity>
+          </>
+        ) : null}
+        {view === 'host' ? (
+          <>
+            <TextInput
+              value={userEmail}
+              placeholder="Your zoom email address"
+              onChangeText={(text) => this.setState({userEmail: text})}
+              style={styles.input}
+            />
+            <TextInput
+              value={meetingTitle}
+              placeholder="Meeting title"
+              onChangeText={(text) => this.setState({meetingTitle: text})}
+              style={styles.input}
+            />
+            <TouchableOpacity onPress={this.createMeeting} style={styles.button}>
+              <Text style={styles.buttonText}>
+                Create Meeting
+              </Text>
+            </TouchableOpacity>
+            {
+              meetingCreated ? (
+                <>
+                  <TextInput
+                    value={meetingId}
+                    placeholder="Meeting ID"
+                    style={styles.input}
+                    editable={false}
+                  />
+                  <TextInput
+                    value={meetingPassword}
+                    placeholder="Meeting Password"
+                    style={styles.input}
+                    editable={false}
+                  />
+                  <TouchableOpacity onPress={this.startMeeting} style={styles.button}>
+                    <Text style={styles.buttonText}>
+                      Start Meeting
+                    </Text>
+                  </TouchableOpacity>
+                </>
+            ) : null }
+          </>
+        ) : null}
       </View>
     );
   }
