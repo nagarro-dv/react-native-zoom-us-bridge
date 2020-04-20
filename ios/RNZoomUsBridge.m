@@ -101,9 +101,9 @@ RCT_EXPORT_METHOD(
 }
 
 RCT_EXPORT_METHOD(
-  joinMeeting: (NSString *)userName
-  withMeetingNo: (NSString *)meetingNumber
-  withPassword:(NSString *)password
+  joinMeeting:(NSString *)meetingNumber
+  userName:(NSString *)userName
+  password:(NSString *)password
   withResolve: (RCTPromiseResolveBlock)resolve
   withReject: (RCTPromiseRejectBlock)reject
 )
@@ -132,6 +132,7 @@ RCT_EXPORT_METHOD(createJWT: (NSString *)jwtApiKey
     NSLog(@"createJWT token success @%@", accessToken);
     resolve(accessToken);
   } @catch (NSError *ex) {
+      reject(@"ERR_UNEXPECTED_EXCEPTION", @"Executing createJWT", ex);
     NSLog(@"ERR_UNEXPECTED_EXCEPTION @%@", ex);
   }
 
