@@ -47,14 +47,14 @@ export default class App extends Component {
       );
     }
 
-    if (this.hiddenSubscription === null) {
+    if (!this.hiddenSubscription) {
       this.hiddenSubscription = meetingEventEmitter.addListener(
         'meetingSetToHidden',
         () => console.log("Meeting Hidden")
       );
     }
 
-    if (this.endedSubscription === null) {
+    if (!this.endedSubscription) {
       this.endedSubscription = meetingEventEmitter.addListener(
         'meetingEnded',
         result => {
@@ -73,7 +73,7 @@ export default class App extends Component {
       );
     }
 
-    if (this.startedSubscription === null) {
+    if (!this.startedSubscription ) {
       this.startedSubscription = meetingEventEmitter.addListener(
         'meetingStarted',
         result => {
@@ -92,7 +92,7 @@ export default class App extends Component {
       );
     }
 
-    if (this.joinedSubscription === null) {
+    if (!this.joinedSubscription ) {
       this.joinedSubscription = meetingEventEmitter.addListener(
         'meetingJoined',
         result => {
