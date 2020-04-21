@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Waiting View Controller-->
+        <scene sceneID="7QU-OE-lzT">
+            <objects>
+                <viewController storyboardIdentifier="WaitingViewController" id="6VV-nq-QHt" customClass="WaitingViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IYy-tM-wev">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6M-75-vyS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting to join the meeting..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxx-iq-wLN">
+                                        <rect key="frame" x="76.5" y="382.5" width="261" height="23"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRa-ja-WC7">
+                                        <rect key="frame" x="175" y="701.5" width="64" height="64"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="4pa-vI-ZUX"/>
+                                            <constraint firstAttribute="height" constant="64" id="Hq1-P5-6dG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <state key="normal" image="icons8-end-call-100">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="32"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="endTapped:" destination="6VV-nq-QHt" eventType="touchUpInside" id="OiF-Md-cEF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="GRa-ja-WC7" firstAttribute="centerX" secondItem="U6M-75-vyS" secondAttribute="centerX" id="EGz-aF-b07"/>
+                                    <constraint firstItem="yxx-iq-wLN" firstAttribute="centerY" secondItem="U6M-75-vyS" secondAttribute="centerY" multiplier="0.88" id="Po5-wc-5ce"/>
+                                    <constraint firstItem="yxx-iq-wLN" firstAttribute="centerX" secondItem="U6M-75-vyS" secondAttribute="centerX" id="rZ6-jr-Lkf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="U6M-75-vyS" firstAttribute="leading" secondItem="IYy-tM-wev" secondAttribute="leading" id="5lL-5T-DBu"/>
+                            <constraint firstAttribute="trailing" secondItem="U6M-75-vyS" secondAttribute="trailing" id="gbh-AP-gEY"/>
+                            <constraint firstItem="U6M-75-vyS" firstAttribute="bottom" secondItem="IYy-tM-wev" secondAttribute="bottom" id="sLF-xl-oyb"/>
+                            <constraint firstItem="U6M-75-vyS" firstAttribute="top" secondItem="IYy-tM-wev" secondAttribute="top" id="sZy-8x-pxl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sZb-Nj-Ve9"/>
+                    </view>
+                    <connections>
+                        <outlet property="waitingLabel" destination="yxx-iq-wLN" id="hK8-yh-WK5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QW0-1Z-avn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="259.4202898550725" y="-23.4375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-end-call-100" width="100" height="100"/>
+    </resources>
+</document>
