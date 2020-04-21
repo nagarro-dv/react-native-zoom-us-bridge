@@ -1,4 +1,5 @@
 # react-native-zoom-us-bridge
+This library bridges React Native with zoom.us SDK. This library uses the zoom.us SDK authentication process. You might have a zoom developer account to use this library. User login using zoom user accounts is not implemented.
 
 ## Getting started
 
@@ -6,58 +7,94 @@
 
 or
 
-yarn react-native-zoom-us-bridge
+`yarn add react-native-zoom-us-bridge`
 
 ### Mostly automatic installation
 
-RN 60 > auto link
+RN 60 >= auto link
 
 RN 60 <
 `$ react-native link react-native-zoom-us-bridge`
 
-Mandatory iOS setup process
-Using Cocoapods (recommended)
-SDK is too large for standard git so lfs must be activated.
-brew git-lfs
-pod install
+### SDK installation
+[Follow SDK installation instructions here](SDK_INSTALLATION.md)
 
-to use dev, swap out pod file.
-
-Manually adding library
-Download library
-Drag library to folder
-Add library and framework
-
-
-Setting up zoom sdk key (required)
-
-Setting up zoom jwt key (optional if you are going to be creating/starting meetings)
-explanation of user accounts
+### SDK Account setup
+[Follow SDK Account instructions here](SDK_ACCOUNT_SETUP.md)
 
 ## Usage
+
+### Basic joining meeting
+APP key and secrent is required
 ```javascript
 import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
-RNZoomUsBridge.joinMeeting();
+RNZoomUsBridge.initialize(
+  ZOOM_APP_KEY,
+  ZOOM_APP_SECRET,
+);
+
+RNZoomUsBridge.joinMeeting(
+  meetingId,
+  userName,
+  meetingPassword,
+);
 
 
-RNZoomUsBridge.startMeeting();
+RNZoomUsBridge.startMeeting(
+
+);
+```
+### Hosting meeting
+JWT key and secret is required
+
+```javascript
+
+// get accessToken to communicate with zoom api
+
+// use token to get userId of the user account you are creating the meeting with
+
+// use the userId to obtain the Zoom Access Token
+
+// use Zoom Access Token etc, to create a meeting
+
+// use the meeting Id to start & join the meting
+RNZoomUsBridge.startMeeting(
+  meetingId,
+  'userName',
+  userId,
+  userZoomAccessToken
+);
 ```
 
-checklist
-SDK app keys etc
-JWT app keys
-can join meeting
-can start meeting
-can not create meeting
-can not login, SDK login only
+### Events from zoom sdk
+Use event emitter to listen for meeting state changes
+```javascript
+import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from 'react-native-zoom-us-bridge';
 
-explain user related stuff
-add event emitter
+const meetingEventEmitter = new NativeEventEmitter(RNZoomUsBridgeEventEmitter);
 
+meetingEventEmitter.addListener(
+  'SDKInitialized',
+  () => {
+    console.log("SDKInitialized");
+  }
+);
 
+"SDKInitialized", "meetingStarted", "meetingJoined", "meetingSetToHidden", "meetingEnded", "meetingStatusChanged", "waitingRoomActive", "meetingError"
 
-Errors
+```
+| Listener             | Description                                  |
+|----------------------|----------------------------------------------|
+| SDKInitialized       | Status update - SDK initialized successfully |
+| meetingStarted       | Status update - Meeting started successfully |
+| meetingJoined        | Status update - Meeting joined successfully  |
+| meetingEnded         | Status update - Meeting ended without error  |
+| meetingStatusChanged | Status update - Updates the meeting status   |
+| meetingError         | Error - Meeting ended with error             |
+| waitingRoomActive    | Error - Meeting waiting room is active       |
+
+## Errors
 build failed undefined issue, file size small, missing lfs
 
 build failed, wont run on sim, need dev libs
