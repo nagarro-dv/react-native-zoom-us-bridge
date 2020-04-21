@@ -1,8 +1,14 @@
+# react-native-zoom-us-bridge Zoom.us SDK Account setup
 
-Go to https://zoom.us//signup and signup for an user account if you haven't yet
+## Sign up for a zoom.us account
+[Signup for an account if you do not have one](https://zoom.us//signup)
 
-Then go back to https://marketplace.zoom.us and signin after you have verified your user email
+Verify your email
 
-Create a new SDK App
+[Signin to the developer console](https://marketplace.zoom.us)
 
-Create a new JWT App (optional for hosting meetings)
+Agree to terms of becoming a developer
+
+[Create a new SDK App](https://marketplace.zoom.us/docs/sdk/native-sdks/preface/sdk-app)
+
+[Create a new JWT App (optional for hosting meetings)](https://marketplace.zoom.us/docs/guides/authorization/jwt-app)
