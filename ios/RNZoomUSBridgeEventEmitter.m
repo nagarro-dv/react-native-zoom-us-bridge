@@ -34,7 +34,18 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents
 {
-  return @[@"SDKInitialized", @"meetingStarted", @"meetingJoined", @"meetingSetToHidden", @"meetingEnded", @"meetingStatusChanged"];
+  return @[@"SDKInitialized", @"meetingStarted", @"meetingJoined", @"meetingSetToHidden", @"meetingEnded", @"meetingStatusChanged", @"waitingRoomActive", @"meetingError"];
+}
+
+- (void)meetingErrored:(NSDictionary *)result
+{
+  [self sendEventWithName:@"meetingError" body:result];
+}
+
+
+- (void)meetingWaitingRoomIsActive:(NSDictionary *)result
+{
+  [self sendEventWithName:@"waitingRoomActive" body:result];
 }
 
 - (void)userSDKInitilized:(NSDictionary *)result

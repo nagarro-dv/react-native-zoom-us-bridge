@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)userSDKInitilized:(NSDictionary *)result;
 - (void)userStartedAMeeting:(NSDictionary *)result;
 - (void)userJoinedAMeeting:(NSDictionary *)result;
+- (void)meetingWaitingRoomIsActive:(NSDictionary *)result;
+- (void)meetingErrored:(NSDictionary *)result;
 
 - (void)userToggledMeetingHidden:(BOOL)hidden;
 

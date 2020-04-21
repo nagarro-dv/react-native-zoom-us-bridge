@@ -76,19 +76,66 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   }
 }
 
-- (void)onMobileRTCAuthReturn:(MobileRTCAuthError)returnValue {
-  NSLog(@"SDK LOG - Auth Returned %d", returnValue);
+- (void)onWaitingRoomStatusChange:(BOOL)needWaiting
+{
+   NSLog(@"onWaitingRoomStatusChange, needWaiting=%d", needWaiting);
+    if (needWaiting) {
+        // waiting room not supported lets leave meeting
+        RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+        [emitter meetingWaitingRoomIsActive:@{}];
+        [self leaveMeeting];
+    }
+}
+
+- (void)leaveMeeting {
+  MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
+  if (!ms) return;
+  [ms leaveMeetingWithCmd:LeaveMeetingCmd_Leave];
   RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
-  
-  NSDictionary *resultDict = returnValue == MobileRTCMeetError_Success ? @{} : @{@"error": @"start_error"};
-  [emitter userSDKInitilized:resultDict];
+  [emitter userEndedTheMeeting:@{}];
+}
 
-  [[[MobileRTC sharedRTC] getAuthService] setDelegate:self];
+- (void)onMeetingStateChange:(MobileRTCMeetingState)state {
+  NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
 
-  if (returnValue != MobileRTCAuthError_Success)
-  {
-    NSLog(@"SDK LOG - Auth Error'd %d", returnValue);
+  if (state == MobileRTCMeetingState_InMeeting || state == MobileRTCMeetingState_Idle) {
+      RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+      [emitter userJoinedAMeeting:@{}];
   }
+}
+
+- (void)onMobileRTCAuthReturn:(MobileRTCAuthError)returnValue {
+    NSLog(@"SDK LOG - Auth Returned %d", returnValue);
+
+    NSDictionary *resultDict = returnValue == MobileRTCMeetError_Success ? @{} : @{@"error": @"start_error"};
+
+    RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+    [emitter userSDKInitilized:resultDict];
+
+    [[[MobileRTC sharedRTC] getAuthService] setDelegate:self];
+
+    if (returnValue != MobileRTCAuthError_Success)
+    {
+        NSLog(@"SDK LOG - Auth Error'd %d", returnValue);
+    }
+}
+
+- (void)onMeetingReturn:(MobileRTCMeetError)errorCode internalError:(NSInteger)internalErrorCode {
+  NSLog(@"onMeetingReturn, error=%d, internalErrorCode=%zd", errorCode, internalErrorCode);
+
+  if (errorCode != MobileRTCMeetError_Success) {
+    RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+    [emitter meetingErrored:@{}];
+  }
+
+}
+
+- (void)onMeetingError:(MobileRTCMeetError)errorCode message:(NSString *)message {
+  NSLog(@"onMeetingError, errorCode=%d, message=%@", errorCode, message);
+
+    RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
+    [emitter meetingErrored:@{}];
+
 }
 
 @end

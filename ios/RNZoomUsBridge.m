@@ -138,59 +138,6 @@ RCT_EXPORT_METHOD(createJWT: (NSString *)jwtApiKey
 
 }
 
-- (void)onMeetingReturn:(MobileRTCMeetError)errorCode internalError:(NSInteger)internalErrorCode {
-  NSLog(@"onMeetingReturn, error=%d, internalErrorCode=%zd", errorCode, internalErrorCode);
-
-  if (!meetingPromiseResolve) {
-    return;
-  }
-
-  if (errorCode != MobileRTCMeetError_Success) {
-    meetingPromiseReject(
-      @"ERR_ZOOM_MEETING",
-      [NSString stringWithFormat:@"Error: %d, internalErrorCode=%zd", errorCode, internalErrorCode],
-      [NSError errorWithDomain:@"us.zoom.sdk" code:errorCode userInfo:nil]
-    );
-  } else {
-    meetingPromiseResolve(@"Connected to zoom meeting");
-  }
-
-  meetingPromiseResolve = nil;
-  meetingPromiseReject = nil;
-}
-
-- (void)onMeetingStateChange:(MobileRTCMeetingState)state {
-  NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
-
-  if (state == MobileRTCMeetingState_InMeeting || state == MobileRTCMeetingState_Idle) {
-    if (!meetingPromiseResolve) {
-      return;
-    }
-
-    meetingPromiseResolve(@"Connected to zoom meeting");
-
-    meetingPromiseResolve = nil;
-    meetingPromiseReject = nil;
-  }
-}
-
-- (void)onMeetingError:(MobileRTCMeetError)errorCode message:(NSString *)message {
-  NSLog(@"onMeetingError, errorCode=%d, message=%@", errorCode, message);
-
-  if (!meetingPromiseResolve) {
-    return;
-  }
-
-  meetingPromiseReject(
-    @"ERR_ZOOM_MEETING",
-    [NSString stringWithFormat:@"Error: %d, internalErrorCode=%@", errorCode, message],
-    [NSError errorWithDomain:@"us.zoom.sdk" code:errorCode userInfo:nil]
-  );
-
-  meetingPromiseResolve = nil;
-  meetingPromiseReject = nil;
-}
-
 /*
  * Request User Token Or ZAK Via Rest API
  * Rest API(List User): https://api.zoom.us/v2/users
