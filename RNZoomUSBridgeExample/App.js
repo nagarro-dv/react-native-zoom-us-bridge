@@ -55,6 +55,23 @@ export default class App extends Component {
       );
     }
 
+    if (!this.meetingWaitingRoomIsActiveSubscription) {
+      this.meetingWaitingRoomIsActiveSubscription = meetingEventEmitter.addListener(
+        'waitingRoomActive',
+        () => {
+          Alert.alert(
+            "Error Joining",
+            "Meeting waiting room is active. Please disable before joining.",
+            [
+              { text: "OK", onPress: () => null }
+            ],
+            { cancelable: false }
+          );
+          console.log("waitingRoomActive");
+        }
+      );
+    }
+
     if (!this.meetingStatusChangedSubscription) {
       this.meetingStatusChangedSubscription = meetingEventEmitter.addListener(
         'meetingStatusChanged',
@@ -74,6 +91,25 @@ export default class App extends Component {
         'meetingEnded',
         result => {
           console.log("Meeting Ended: ", result)
+          if ('error' in result) {
+            Alert.alert(
+              "Error Joining",
+              "One of your inputs is invalid.",
+              [
+                { text: "OK", onPress: () => null }
+              ],
+              { cancelable: false }
+            );
+          }
+        }
+      );
+    }
+
+    if (!this.meetingErroredSubscription) {
+      this.meetingErroredSubscription = meetingEventEmitter.addListener(
+        'meetingError',
+        result => {
+          console.log("Meeting Errored: ", result)
           if ('error' in result) {
             Alert.alert(
               "Error Joining",
