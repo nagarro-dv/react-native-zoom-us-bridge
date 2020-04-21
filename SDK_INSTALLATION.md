@@ -4,8 +4,8 @@
 
 To use pod you will need to activate lfs for your git cli.
 
-tl;dr git lfs is used to store large files, zoom.us iOS SDK is huge.
-
+**tl;dr git lfs is used to store large files, zoom.us iOS SDK is huge.
+**
 ready more about git lfs https://help.github.com/en/github/managing-large-files/installing-git-large-file-storage
 
 Activate lfs by using homebrew `brew install git-lfs`

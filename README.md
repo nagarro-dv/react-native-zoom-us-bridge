@@ -94,6 +94,10 @@ meetingEventEmitter.addListener(
 | meetingError         | Error - Meeting ended with error             |
 | waitingRoomActive    | Error - Meeting waiting room is active       |
 
+## Running the Example app
+[Follow Example app setup instructions here](RNZoomUSBridgeExample/README.md)
+
+
 ## Errors
 build failed undefined issue, file size small, missing lfs
 
