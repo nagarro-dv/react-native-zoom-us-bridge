@@ -231,15 +231,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${BUILT_PRODUCTS_DIR}/**",
-					"${SRCROOT}/../../../ios/ZoomSDK/**",
-					"${SRCROOT}/../../../ios/Pods/ZoomSDK/**",
+					"${SRCROOT}/../../../ios/ZoomSDK",
+					"${SRCROOT}/../../../ios/Pods/ZoomSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"${SRCROOT}/../../../ios/ZoomSDK/**",
-					"${SRCROOT}/../../../ios/Pods/ZoomSDK/**",
+					"${SRCROOT}/../../../ios/Pods/Headers/Public/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -254,15 +253,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${BUILT_PRODUCTS_DIR}/**",
-					"${SRCROOT}/../../../ios/ZoomSDK/**",
-					"${SRCROOT}/../../../ios/Pods/ZoomSDK/**",
+					"${SRCROOT}/../../../ios/ZoomSDK",
+					"${SRCROOT}/../../../ios/Pods/ZoomSDK",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"${SRCROOT}/../../../ios/ZoomSDK/**",
-					"${SRCROOT}/../../../ios/Pods/ZoomSDK/**",
+					"${SRCROOT}/../../../ios/Pods/Headers/Public/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
