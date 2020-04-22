@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C907C4D2450E8F200C52BBA /* RNZoomUsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C907C492450E8F200C52BBA /* RNZoomUsManager.m */; };
+		3C907C4E2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C907C4C2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNZoomUsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNZoomUsBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +26,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNZoomUsBridge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNZoomUsBridge.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C907C492450E8F200C52BBA /* RNZoomUsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZoomUsManager.m; sourceTree = "<group>"; };
+		3C907C4A2450E8F200C52BBA /* RNZoomUsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNZoomUsManager.h; sourceTree = "<group>"; };
+		3C907C4B2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNZoomUsBridgeEventEmitter.h; sourceTree = "<group>"; };
+		3C907C4C2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZoomUsBridgeEventEmitter.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNZoomUsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNZoomUsBridge.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNZoomUsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZoomUsBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +56,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				3C907C4B2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.h */,
+				3C907C4C2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.m */,
+				3C907C4A2450E8F200C52BBA /* RNZoomUsManager.h */,
+				3C907C492450E8F200C52BBA /* RNZoomUsManager.m */,
 				B3E7B5881CC2AC0600A0062D /* RNZoomUsBridge.h */,
 				B3E7B5891CC2AC0600A0062D /* RNZoomUsBridge.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -113,7 +123,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C907C4D2450E8F200C52BBA /* RNZoomUsManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNZoomUsBridge.m in Sources */,
+				3C907C4E2450E8F200C52BBA /* RNZoomUsBridgeEventEmitter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
