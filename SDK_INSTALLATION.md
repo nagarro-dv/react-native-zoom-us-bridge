@@ -10,12 +10,12 @@ To use pod you will need to activate lfs for your git cli.
 
 Activate lfs by using homebrew `brew install git-lfs`
 
-Make sure this is added to your Podfile `pod 'ZoomDEVSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'`
+Make sure this is added to your Podfile `pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'`
 
 `pod install` from ios folder.
 
 ### Optional, using production Zoom.us SDK
-`ZoomDEVSDK` can not be used for release build. Apple Will reject your App. You must use this Pod instead. However, this pod file does not work with simulators.
+`pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'` can not be used for release build. Apple Will reject your App. You must use this Pod instead. However, this pod file does not work with simulators.
 
 `pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-pod.git'`
 
