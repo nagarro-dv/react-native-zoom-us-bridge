@@ -182,9 +182,9 @@ PODS:
     - React-cxxreact (= 0.61.0)
     - React-jsi (= 0.61.0)
   - React-jsinspector (0.61.0)
-  - react-native-zoom-us-bridge (0.1.0):
+  - react-native-zoom-us-bridge (0.0.1):
     - React
-    - ZoomDEVSDK
+    - ZoomSDK
   - React-RCTActionSheet (0.61.0):
     - React-Core/RCTActionSheetHeaders (= 0.61.0)
   - React-RCTAnimation (0.61.0):
@@ -221,9 +221,9 @@ PODS:
     - React-jsi (= 0.61.0)
     - ReactCommon/jscallinvoker (= 0.61.0)
   - Yoga (1.14.0)
-  - ZoomDEVSDK (4.6.15805.0403):
-    - ZoomDEVSDK/Core (= 4.6.15805.0403)
-  - ZoomDEVSDK/Core (4.6.15805.0403)
+  - ZoomSDK (4.6.15805.0403):
+    - ZoomSDK/Core (= 4.6.15805.0403)
+  - ZoomSDK/Core (4.6.15805.0403)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -255,7 +255,7 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
-  - ZoomDEVSDK (from `https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git`)
+  - ZoomSDK (from `https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git`)
 
 SPEC REPOS:
   trunk:
@@ -314,12 +314,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
-  ZoomDEVSDK:
+  ZoomSDK:
     :git: https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git
 
 CHECKOUT OPTIONS:
-  ZoomDEVSDK:
-    :commit: 1a2644ea8b33e47df364c41a038528f56f60593e
+  ZoomSDK:
+    :commit: 3bdaadcdfcd628177f1f9e08f18508838d4ab821
     :git: https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git
 
 SPEC CHECKSUMS:
@@ -338,7 +338,7 @@ SPEC CHECKSUMS:
   React-jsi: 4b5e521350c455b5eb4be50ea98c02de25b44fad
   React-jsiexecutor: 5532ab4389aabbbf1b87904de04c8ddd7dda7036
   React-jsinspector: 99b82aeb51d67d9025ab4eb8ccb8132f8dcebf69
-  react-native-zoom-us-bridge: 357b79408faba2da8f08b842f87371df2ed66f4d
+  react-native-zoom-us-bridge: c1d9086e19b2bffad64d454263374a5eef156b1a
   React-RCTActionSheet: 5f9a1733ec8e380aae8a97877f1166cb058733ae
   React-RCTAnimation: 3e0a55305b70b1eb5a5e34230ed8198d4a782da9
   React-RCTBlob: a6ff2220ed7ef4b06e559ec61a0b0f4e80a3716a
@@ -350,8 +350,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: c8e67f140a83a14a1ad9042950cca08ab29423fd
   ReactCommon: 584ef683c340894c1c82be43ce760390493ae8bf
   Yoga: 3f70bbd9aa01e04eefec36e2a085b2fc0ff1dd98
-  ZoomDEVSDK: 0126d18e867c47ded3ff04257419e6fd65aaee6a
+  ZoomSDK: 3fad6e9ab7d3f86de05574b529b511eff93c0118
 
-PODFILE CHECKSUM: 2a467fa17b80aea89e63643a3f0340a5bc14aab1
+PODFILE CHECKSUM: 35e4e38ca1aa08add502dadec89b8fb2158f2946
 
 COCOAPODS: 1.9.1

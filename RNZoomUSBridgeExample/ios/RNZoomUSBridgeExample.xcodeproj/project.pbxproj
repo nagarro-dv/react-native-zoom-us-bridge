@@ -208,7 +208,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-resources.sh",
-				"${PODS_ROOT}/ZoomDEVSDK/MobileRTCResources.bundle",
+				"${PODS_ROOT}/ZoomSDK/MobileRTCResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -248,7 +248,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-frameworks.sh",
-				"${PODS_ROOT}/ZoomDEVSDK/MobileRTC.framework",
+				"${PODS_ROOT}/ZoomSDK/MobileRTC.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -333,7 +333,6 @@
 					"\"${PODS_ROOT}/Headers/Public/glog\"",
 					"\"${PODS_ROOT}/Headers/Public/react-native-zoom-us-bridge\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-					"\"$(PODS_ROOT)/ZoomSDK/**",
 				);
 				INFOPLIST_FILE = RNZoomUSBridgeExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -375,7 +374,6 @@
 					"\"${PODS_ROOT}/Headers/Public/glog\"",
 					"\"${PODS_ROOT}/Headers/Public/react-native-zoom-us-bridge\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-					"\"$(PODS_ROOT)/ZoomSDK/**",
 				);
 				INFOPLIST_FILE = RNZoomUSBridgeExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

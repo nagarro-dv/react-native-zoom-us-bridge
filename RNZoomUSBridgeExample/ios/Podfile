@@ -34,7 +34,7 @@ target 'RNZoomUSBridgeExample' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'ZoomDEVSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'
+  pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'
 
   use_native_modules!
 end
