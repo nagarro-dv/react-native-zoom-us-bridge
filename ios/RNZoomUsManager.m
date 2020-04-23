@@ -98,7 +98,7 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
 - (void)onMeetingStateChange:(MobileRTCMeetingState)state {
   NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
 
-  if (state == MobileRTCMeetingState_InMeeting || state == MobileRTCMeetingState_Idle) {
+  if (state == MobileRTCMeetingState_InMeeting) {
       RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
       [emitter userJoinedAMeeting:@{}];
   }
@@ -132,9 +132,10 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
 
 - (void)onMeetingError:(MobileRTCMeetError)errorCode message:(NSString *)message {
   NSLog(@"onMeetingError, errorCode=%d, message=%@", errorCode, message);
-
+if (errorCode != MobileRTCMeetError_Success) {
     RNZoomUsBridgeEventEmitter *emitter = [RNZoomUsBridgeEventEmitter allocWithZone: nil];
     [emitter meetingErrored:@{}];
+}
 
 }
 

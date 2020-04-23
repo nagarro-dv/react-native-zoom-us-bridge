@@ -345,7 +345,7 @@ SPEC CHECKSUMS:
   React-RCTText: beb19a6c50072a1a2f617490ea967237c98d1dfc
   React-RCTVibration: c8e67f140a83a14a1ad9042950cca08ab29423fd
   ReactCommon: 584ef683c340894c1c82be43ce760390493ae8bf
-  RNZoomUsBridge: 625ff2768ce7c2078c3440e71de7910726dd8a17
+  RNZoomUsBridge: a9f184fdee18823602fef1f5cf9df74dd9ab7e81
   Yoga: 3f70bbd9aa01e04eefec36e2a085b2fc0ff1dd98
   ZoomSDK: 9480ad5a2e0fbb01c4df220648d45db97d579374
 
