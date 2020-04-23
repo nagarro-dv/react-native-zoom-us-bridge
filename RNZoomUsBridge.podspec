@@ -28,6 +28,6 @@ Pod::Spec.new do |s|
   # s.dependency "..."
 
   # s.static_framework = true
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => ['"${PODS_ROOT}/ZoomSDK"'] }
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => ['"${PODS_ROOT}/ZoomSDK"', '"${PODS_ROOT}/../ZoomSDK"'] }
 end
 
