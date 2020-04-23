@@ -32,6 +32,14 @@ Make sure this is added to your Podfile `pod 'ZoomSDK', :git => 'https://github.
 
 or [Follow this orignal guide to integrate the SDK](https://marketplace.zoom.us/docs/sdk/native-sdks/iOS/getting-started/integration)
 
+## iOS manual step required add permissions to info.plist
+```javascript
+<key>NSCameraUsageDescription</key>
+<string>we need your camera</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>we need your mic</string>
+```
+
 ## Android installation via manual download
 Sorry, there are no semi-auto way to install the Android SDK at the moment. It must be done 100% manually.
 [Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
@@ -40,10 +48,12 @@ Sorry, there are no semi-auto way to install the Android SDK at the moment. It m
 2. Select both and drag into your project/android folder (android_image1, 2)
 3. Open `android/settings.gradle` add `, ':mobilertc', ':commonlib'` to `include ':app'` (android_image3)
 4. Open `android/build.gradle` and update your sdk versions to match the following
-   ```buildToolsVersion = "29.0.0"
+   ```javascript
+   buildToolsVersion = "29.0.0"
         minSdkVersion = 21
         compileSdkVersion = 29
-        targetSdkVersion = 28``` (android_image4)
+        targetSdkVersion = 28
+        ``` (android_image4)
 5. Open `android/app/build.gradle` and add `multiDexEnabled true` to `defaultConfig` (android_image5)
 
 
