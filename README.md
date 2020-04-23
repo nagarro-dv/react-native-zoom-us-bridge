@@ -19,13 +19,13 @@ This library bridges React Native with zoom.us SDK and implements the SDK authen
 Install the library from npm:
 
 ```sh
-npm install react-native-zoom-us-bridge --save
+npm i @mokriya/react-native-zoom-us-bridge --save
 ```
 
 or 
 
 ```sh
-yarn add react-native-zoom-us-bridge
+yarn add @mokriya/react-native-zoom-us-bridge
 ```
 
 Then follow the instructions for your platform to link into your project:
