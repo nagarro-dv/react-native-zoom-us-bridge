@@ -220,9 +220,7 @@ PODS:
   - RNZoomUsBridge (0.0.1):
     - React
   - Yoga (1.14.0)
-  - ZoomSDK (4.6.15805.0403):
-    - ZoomSDK/Core (= 4.6.15805.0403)
-  - ZoomSDK/Core (4.6.15805.0403)
+  - ZoomSDK (4.6.15805.0403)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -318,7 +316,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ZoomSDK:
-    :commit: 3bdaadcdfcd628177f1f9e08f18508838d4ab821
+    :commit: 2dcfc0eab5ef6e31df394c433cc197d052401c8a
     :git: https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git
 
 SPEC CHECKSUMS:
@@ -347,9 +345,9 @@ SPEC CHECKSUMS:
   React-RCTText: beb19a6c50072a1a2f617490ea967237c98d1dfc
   React-RCTVibration: c8e67f140a83a14a1ad9042950cca08ab29423fd
   ReactCommon: 584ef683c340894c1c82be43ce760390493ae8bf
-  RNZoomUsBridge: c3c942acdf0827fc7d204935ea673936573b10c9
+  RNZoomUsBridge: 625ff2768ce7c2078c3440e71de7910726dd8a17
   Yoga: 3f70bbd9aa01e04eefec36e2a085b2fc0ff1dd98
-  ZoomSDK: 3fad6e9ab7d3f86de05574b529b511eff93c0118
+  ZoomSDK: 9480ad5a2e0fbb01c4df220648d45db97d579374
 
 PODFILE CHECKSUM: 35e4e38ca1aa08add502dadec89b8fb2158f2946
 
