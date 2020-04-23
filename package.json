@@ -13,7 +13,10 @@
     "baseUrl": "https://github.com/mokriya-org/react-native-zoom-us-bridge"
   },
   "keywords": [
-    "react-native"
+    "react",
+    "react-native",
+    "zoom",
+    "zoom sdk"
   ],
   "author": "Mokriya <info@mokriya.com>",
   "license": "MIT",

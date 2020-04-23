@@ -1,6 +1,7 @@
 # react-native-zoom-us-bridge
-This library bridges React Native with zoom.us SDK. This library uses the zoom.us SDK authentication process. You might have a zoom developer account to use this library. User login using zoom user accounts is not implemented.
+This library bridges React Native with zoom.us SDK and implements the SDK authentication process.
 
+***Note:  User login using zoom user accounts is not implemented.***
 
 ## Table of Contents
 
