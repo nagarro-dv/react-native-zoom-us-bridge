@@ -173,19 +173,30 @@ RNZoomUsBridge.initialize(
   ZOOM_APP_SECRET,
 );
 
-// get accessToken to communicate with zoom api
+// create accessToken used to communicate with zoom api
+const accessToken = await RNZoomUsBridge.createJWT(
+  ZOOM_JWT_APP_KEY,
+  ZOOM_JWT_APP_SECRET
+).then().catch((err) => console.log(err));
 
-// use token to get userId of the user account you are creating the meeting with
+// use accessToken to get userId of the user account you are creating the meeting with
+const userId = await getUserID('user@email.com', accessToken);
 
-// use the userId to obtain the Zoom Access Token
+// use the userId to obtain the user Zoom Access Token
+const userZak = await createUserZAK(userId, accessToken);
 
-// use Zoom Access Token etc, to create a meeting
+// use Access Token etc, to create a meeting
+const createMeetingResult = await createMeeting(userId, accessToken);
 
-// use the meeting Id to start & join the meting
+// get meeting id from result
+const {id: meetingId} = createMeetingResult;
+
+// use the meeting Id, userId, user name and user zoom access token to start & join the meting
 RNZoomUsBridge.startMeeting(
   meetingId,
+  userName,
   userId,
-  userZoomAccessToken
+  userZak
 );
 ```
 

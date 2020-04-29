@@ -199,7 +199,10 @@ export default class App extends Component {
   createAccessToken = async () => {
     // to talk to ZOOM API you will need access token
     if (!ZOOM_JWT_APP_KEY || !ZOOM_JWT_APP_SECRET) return false;
-    const accessToken = await RNZoomUsBridge.createJWT(ZOOM_JWT_APP_KEY, ZOOM_JWT_APP_SECRET).then().catch((err) => console.log(err));
+    const accessToken = await RNZoomUsBridge.createJWT(
+      ZOOM_JWT_APP_KEY,
+      ZOOM_JWT_APP_SECRET
+    ).then().catch((err) => console.log(err));
 
     console.log(`createAccessToken ${accessToken}`);
 
@@ -289,55 +292,51 @@ export default class App extends Component {
 
     // user ID is pulled from jwt end point using the email address
     const userId = await this.getUserID(userEmail, accessToken);
+    await this.createUserZAK(userId, accessToken);
 
     if (userId) {
-      // user zak is needed to create meeting
-      const userZAK = await this.createUserZAK(userId, accessToken);
+      // use api to create meeting
 
-      if (userZAK) {
-        // use api to create meeting
+      const fetchURL = `https://api.zoom.us/v2/users/${userId}/meetings`
+      const createMeetingResult = await fetch(fetchURL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          topic: meetingTitle,
+          type: 1,
+          duration: 30,
+          password: "123456", // set your own password is possible
+          settings: {
+            waiting_room: false,
+            registrants_confirmation_email: false,
+            audio: 'voip',
+          }
+        }),
+      }).then((response) => response.json())
+      .then((json) => {
+        return json;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-        const fetchURL = `https://api.zoom.us/v2/users/${userId}/meetings`
-        const createMeetingResult = await fetch(fetchURL, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            topic: meetingTitle,
-            type: 1,
-            duration: 30,
-            password: "123456",
-            settings: {
-              waiting_room: false,
-              registrants_confirmation_email: false,
-              audio: 'voip',
-            }
-          }),
-        }).then((response) => response.json())
-        .then((json) => {
-          return json;
-        })
-        .catch((error) => {
-          console.error(error);
+      console.log('createMeetingResult', createMeetingResult);
+
+      if (createMeetingResult && createMeetingResult.code === 429) {
+        // rate error try again later
+        Alert.alert('API Rate error try again in a few seconds');
+      }
+
+      if (createMeetingResult && createMeetingResult.id) {
+        const {id, password} = createMeetingResult;
+        this.setState({
+          meetingId: id,
+          meetingPassword: password,
+          meetingCreated: true,
         });
-
-        console.log('createMeetingResult', createMeetingResult);
-
-        if (createMeetingResult && createMeetingResult.code === 429) {
-          // rate error try again later
-          Alert.alert('API Rate error try again in a few seconds');
-        }
-
-        if (createMeetingResult && createMeetingResult.id) {
-          const {id, password} = createMeetingResult;
-          this.setState({
-            meetingId: id,
-            meetingPassword: password,
-            meetingCreated: true,
-          });
-        }
       }
     }
   }
@@ -346,6 +345,7 @@ export default class App extends Component {
     const {
       meetingId,
       userId,
+      userName,
       userZoomAccessToken,
     } = this.state;
 
@@ -353,9 +353,9 @@ export default class App extends Component {
 
     await RNZoomUsBridge.startMeeting(
       String(meetingId),
-      'username', // ignored, start meeting will use user details of userZoomAccessToken
-      userId, // can be 'null'?
-      userZoomAccessToken, // zak token
+      userName,
+      userId,
+      userZoomAccessToken,
     );
 
   }
