@@ -22,7 +22,7 @@ Install the library from npm:
 npm i @mokriya/react-native-zoom-us-bridge --save
 ```
 
-or 
+or
 
 ```sh
 yarn add @mokriya/react-native-zoom-us-bridge
@@ -65,7 +65,7 @@ pod install
 
 <details>
   <summary>Manual Link</summary>
-  
+
 [Download zoom.us iOS SDK](https://github.com/zoom/zoom-sdk-ios)
 
 1. Unzip the sdk and locate contents.
@@ -84,6 +84,11 @@ pod install
 See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/iOS/getting-started/integration) for more information.
 </details>
 
+### Bitcode
+
+Zoom SDK library does not support bitcode. Please make sure to set bitcode to `No`
+![](./assets/ios_bitcode.png)
+
 ### App store submission (iOS)
 
 The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMicrophoneUsageDescription` with a description explaining clearly why your app needs access to the camera and microphone, otherwise Apple will reject your app submission.
@@ -95,7 +100,7 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
 
 <details>
   <summary>Manual Link</summary>
-  
+
 [Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
 
 
@@ -115,7 +120,7 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
         compileSdkVersion = 29
         targetSdkVersion = 28
     ```
-   
+
    ![](./assets/android_image4.jpg)
 
 8. Open `android/app/build.gradle`
@@ -137,8 +142,11 @@ See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-star
 
 ## Usage
 
+### Storing App/Jwt key on app securely
+You should avoid hardcoding your App/Jwt key and secret. In our example we hardcode the data for example only. There are various ways to store your key/secret safely on the net. Please make sure to read and find your best possible way. [rn security](https://reactnative.dev/docs/security)
+
 ### Basic joining meeting
-APP key and secrent is required
+**APP key and secret is required**
 ```javascript
 import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
@@ -153,30 +161,42 @@ RNZoomUsBridge.joinMeeting(
   meetingPassword,
 );
 
-
-RNZoomUsBridge.startMeeting(
-
-);
 ```
 ### Hosting meeting
-JWT key and secret is required
+**JWT key and secret is required**
 
 ```javascript
+import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
-// get accessToken to communicate with zoom api
+RNZoomUsBridge.initialize(
+  ZOOM_APP_KEY,
+  ZOOM_APP_SECRET,
+);
 
-// use token to get userId of the user account you are creating the meeting with
+// create accessToken used to communicate with zoom api
+const accessToken = await RNZoomUsBridge.createJWT(
+  ZOOM_JWT_APP_KEY,
+  ZOOM_JWT_APP_SECRET
+).then().catch((err) => console.log(err));
 
-// use the userId to obtain the Zoom Access Token
+// use accessToken to get userId of the user account you are creating the meeting with
+const userId = await getUserID('user@email.com', accessToken);
 
-// use Zoom Access Token etc, to create a meeting
+// use the userId to obtain the user Zoom Access Token
+const userZak = await createUserZAK(userId, accessToken);
 
-// use the meeting Id to start & join the meting
+// use Access Token etc, to create a meeting
+const createMeetingResult = await createMeeting(userId, accessToken);
+
+// get meeting id from result
+const {id: meetingId} = createMeetingResult;
+
+// use the meeting Id, userId, user name and user zoom access token to start & join the meting
 RNZoomUsBridge.startMeeting(
   meetingId,
-  'userName',
+  userName,
   userId,
-  userZoomAccessToken
+  userZak
 );
 ```
 
@@ -194,8 +214,6 @@ meetingEventEmitter.addListener(
   }
 );
 
-"SDKInitialized", "meetingStarted", "meetingJoined", "meetingSetToHidden", "meetingEnded", "meetingStatusChanged", "waitingRoomActive", "meetingError"
-
 ```
 | Listener             | Description                                  |
 |----------------------|----------------------------------------------|
@@ -207,13 +225,36 @@ meetingEventEmitter.addListener(
 | meetingError         | Error - Meeting ended with error             |
 | waitingRoomActive    | Error - Meeting waiting room is active       |
 
+## Frequently Asked Questions
+### Can Zoom US bridge join a meeting created from other zoom apps?
+Yes, as long as waiting room is turned off (iOS only), and user does not need to login.
+
+### Can Zoom US bridge create a meeting?
+Yes.
+
+### Can Zoom US bridge start a meeting?
+Yes, as long as the user matches the user whom created the meeting.
+
+### Can Zoom US bridge join a meeting that have waiting room?
+No, not currently (iOS only). Android does support waiting room.
+
+### Can Zoom US bridge join a meeting that have not started?
+No, not currently (iOS only).
+
+### Can Zoom US bridge use Zoom's custom UI?
+No, not currently.
+
+### Why is there event listener if startMeeting and joinMeeting already returns result?
+The result returned from startMeeting and joinMeeting are simple status that indicate if the command was executed successfully or not. The actual meeting joined status might not be available until a few seconds later. Always rely on the meetingJoined listener to determine if meeting have been joined successfully.
+
+### Can user login to zoom via Zoom US bridge?
+No, not currently. At the moment Zoom US bridge uses SDK App Key and JWT App Key.
+
+### Does user account need to be in the same account as App SDK/JWT?
+Yes.
 
 ## Errors
-build failed undefined issue, file size small, missing lfs
-
-build failed, wont run on sim, need dev libs
-
-build success, apple reject, wrong libs, need prod libs
+[See Common Errors Here](COMMON_ERRORS.md)
 
 ## Example Project
 
