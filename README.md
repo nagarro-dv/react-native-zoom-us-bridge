@@ -22,7 +22,7 @@ Install the library from npm:
 npm i @mokriya/react-native-zoom-us-bridge --save
 ```
 
-or 
+or
 
 ```sh
 yarn add @mokriya/react-native-zoom-us-bridge
@@ -65,7 +65,7 @@ pod install
 
 <details>
   <summary>Manual Link</summary>
-  
+
 [Download zoom.us iOS SDK](https://github.com/zoom/zoom-sdk-ios)
 
 1. Unzip the sdk and locate contents.
@@ -84,6 +84,11 @@ pod install
 See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/iOS/getting-started/integration) for more information.
 </details>
 
+### Bitcode
+
+Zoom SDK library does not support bitcode. Please make sure to set bitcode to `No`
+![](./assets/ios_bitcode.png)
+
 ### App store submission (iOS)
 
 The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMicrophoneUsageDescription` with a description explaining clearly why your app needs access to the camera and microphone, otherwise Apple will reject your app submission.
@@ -95,7 +100,7 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
 
 <details>
   <summary>Manual Link</summary>
-  
+
 [Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
 
 
@@ -115,7 +120,7 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
         compileSdkVersion = 29
         targetSdkVersion = 28
     ```
-   
+
    ![](./assets/android_image4.jpg)
 
 8. Open `android/app/build.gradle`
@@ -138,7 +143,7 @@ See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-star
 ## Usage
 
 ### Basic joining meeting
-APP key and secrent is required
+**APP key and secrent is required**
 ```javascript
 import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
@@ -153,13 +158,9 @@ RNZoomUsBridge.joinMeeting(
   meetingPassword,
 );
 
-
-RNZoomUsBridge.startMeeting(
-
-);
 ```
 ### Hosting meeting
-JWT key and secret is required
+**JWT key and secret is required**
 
 ```javascript
 
@@ -194,8 +195,6 @@ meetingEventEmitter.addListener(
   }
 );
 
-"SDKInitialized", "meetingStarted", "meetingJoined", "meetingSetToHidden", "meetingEnded", "meetingStatusChanged", "waitingRoomActive", "meetingError"
-
 ```
 | Listener             | Description                                  |
 |----------------------|----------------------------------------------|
@@ -209,11 +208,7 @@ meetingEventEmitter.addListener(
 
 
 ## Errors
-build failed undefined issue, file size small, missing lfs
-
-build failed, wont run on sim, need dev libs
-
-build success, apple reject, wrong libs, need prod libs
+[See Common Errors Here](COMMON_ERRORS.md)
 
 ## Example Project
 

@@ -2,14 +2,15 @@
 Various issues you might encounter using this library.
 
 ## iOS Build issues
-Building for Actual Device with x86 SDK
+`'/RNZoomUSBridgeExample/ios/Pods/ZoomSDK/MobileRTC.framework/MobileRTC' does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. file '/RNZoomUSBridgeExample/ios/Pods/ZoomSDK/MobileRTC.framework/MobileRTC' for architecture arm64`
+This is caused by bitcode being enabled in the project. Disable bitcode.
+
 ```javascript
 ld: '/RNZoomUsBirdge/ios/Pods/ZoomSDK/MobileRTC.framework/MobileRTC' does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. file '/RNZoomUsBirdge/ios/Pods/ZoomSDK/MobileRTC.framework/MobileRTC' for architecture arm64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 This is caused by building for Actual Device with the x86_64/i386 SDK. Please make sure to use the non x86_64 SDK.
 
-SDK not installed
 `'MobileRTC/MobileRTC.h' file not found`
 This is caused by SDK not installed or not copied to the proper location.
 
