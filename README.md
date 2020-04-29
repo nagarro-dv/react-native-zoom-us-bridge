@@ -142,8 +142,11 @@ See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-star
 
 ## Usage
 
+### Storing App/Jwt key on app securely
+You should avoid hardcoding your App/Jwt key and secret. In our example we hardcode the data for example only. There are various ways to store your key/secret safely on the net. Please make sure to read and find your best possible way.
+
 ### Basic joining meeting
-**APP key and secrent is required**
+**APP key and secret is required**
 ```javascript
 import RNZoomUsBridge from 'react-native-zoom-us-bridge';
 
@@ -206,6 +209,30 @@ meetingEventEmitter.addListener(
 | meetingError         | Error - Meeting ended with error             |
 | waitingRoomActive    | Error - Meeting waiting room is active       |
 
+## Frequently Asked Questions
+### Can Zoom SDK Bridge join a meeting created from other zoom apps?
+Yes, as long as waiting room is turned off (iOS only), and user does not need to login.
+
+### Can Zoom SDK Bridge create a meeting?
+Yes.
+
+### Can Zoom SDK Bridge start a meeting?
+Yes, as long as the user matches the user whom created the meeting.
+
+### Can Zoom SDK Bridge join a meeting that have waiting room?
+No, not currently (iOS only). Android does support waiting room.
+
+### Can Zoom SDK Bridge use Zoom's custom UI?
+No, not currently.
+
+### Why is there event listener if startMeeting and joinMeeting already returns result?
+The result returned from startMeeting and joinMeeting are simple status that indicate if the command was executed successfully or not. The actual meeting joined status might not be available until a few seconds later. Always rely on the meetingJoined listener to determine if meeting have been joined successfully.
+
+### Can user login to zoom via Zoom SDK Bridge?
+No, not currently. At the moment Zoom SDK Bridge uses SDK App Key and JWT App Key.
+
+### Does user account need to be in the same account as App SDK/JWT?
+Yes.
 
 ## Errors
 [See Common Errors Here](COMMON_ERRORS.md)
