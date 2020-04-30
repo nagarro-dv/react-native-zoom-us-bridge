@@ -1,7 +1,7 @@
 {
   "name": "@mokriya/react-native-zoom-us-bridge",
   "title": "React Native Zoom Us Bridge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TODO",
   "main": "index.js",
   "scripts": {
