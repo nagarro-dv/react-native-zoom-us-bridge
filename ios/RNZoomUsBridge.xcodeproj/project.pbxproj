@@ -231,7 +231,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${BUILT_PRODUCTS_DIR}/**",
-					"\"${PODS_ROOT}/ZoomSDK\"",
+					"\"${SRCROOT}/../../../../ios/Pods/ZoomSDK\"",
+					"\"${SRCROOT}/../../../../ios/ZoomSDK\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -252,8 +253,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"${BUILT_PRODUCTS_DIR}/**",
-					"\"${PODS_ROOT}/ZoomSDK\"",
-					"${SRCROOT}/../../../ios/Pods/ZoomSDK",
+					"\"${SRCROOT}/../../../../ios/Pods/ZoomSDK\"",
+					"\"${SRCROOT}/../../../../ios/ZoomSDK\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
