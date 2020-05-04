@@ -28,7 +28,15 @@ or
 yarn add @mokriya/react-native-zoom-us-bridge
 ```
 
-Then follow the instructions for your platform to link into your project:
+Library will AUTO LINK for React-Native 60 or higher.
+
+RN 59 or lower please make sure to
+```sh
+react-native link @mokriya/react-native-zoom-us-bridge
+```
+
+Then follow the instructions for your platform to add ZoomUS SDK into your project:
+
 
 ### iOS installation
 
@@ -95,6 +103,11 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
 
 
 ### Android installation
+If you are using RN 59 or lower, you will need to enable Android X. Add this to your `gradle.properties`
+```
+android.useAndroidX=true
+android.enableJetifier=true
+```
 
 ***There are no semi-auto way to install the Android SDK at the moment. It must be done 100% manually.***
 
