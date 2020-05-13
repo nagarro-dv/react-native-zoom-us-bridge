@@ -1,11 +1,3 @@
-//
-//  ModernHealthEventEmitter.m
-//  modernHealthPocRN61
-//
-//  Created by Brian Thomas on 4/9/20.
-//  Copyright © 2020 Facebook. All rights reserved.
-//
-
 #import "RNZoomUsBridgeEventEmitter.h"
 
 @implementation RNZoomUsBridgeEventEmitter
@@ -39,37 +31,51 @@ RCT_EXPORT_MODULE();
 
 - (void)meetingErrored:(NSDictionary *)result
 {
-  [self sendEventWithName:@"meetingError" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"meetingError" body:result];
+    }
 }
 
 
 - (void)meetingWaitingRoomIsActive:(NSDictionary *)result
 {
-  [self sendEventWithName:@"waitingRoomActive" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"waitingRoomActive" body:result];
+    }
 }
 
 - (void)userSDKInitilized:(NSDictionary *)result
 {
-  [self sendEventWithName:@"SDKInitialized" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"SDKInitialized" body:result];
+    }
 }
 
 - (void)userStartedAMeeting:(NSDictionary *)result
 {
-  [self sendEventWithName:@"meetingStarted" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"meetingStarted" body:result];
+    }
 }
 
 - (void)userJoinedAMeeting:(NSDictionary *)result {
-  [self sendEventWithName:@"meetingJoined" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"meetingJoined" body:result];
+    }
 }
 
 - (void)userToggledMeetingHidden:(BOOL)hidden
 {
-  [self sendEventWithName:@"meetingSetToHidden" body:@{}];
+    if (hasListeners) {
+        [self sendEventWithName:@"meetingSetToHidden" body:@{}];
+    }
 }
 
 - (void)userEndedTheMeeting:(NSDictionary *)result
 {
-  [self sendEventWithName:@"meetingEnded" body:result];
+    if (hasListeners) {
+        [self sendEventWithName:@"meetingEnded" body:result];
+    }
 }
 
 @end

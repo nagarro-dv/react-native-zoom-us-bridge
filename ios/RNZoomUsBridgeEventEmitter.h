@@ -1,11 +1,3 @@
-//
-//  ModernHealthEventEmitter.h
-//  modernHealthPocRN61
-//
-//  Created by Brian Thomas on 4/9/20.
-//  Copyright © 2020 Facebook. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
