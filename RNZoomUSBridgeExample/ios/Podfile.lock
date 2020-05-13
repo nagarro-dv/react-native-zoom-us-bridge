@@ -217,7 +217,7 @@ PODS:
     - React-cxxreact (= 0.61.0)
     - React-jsi (= 0.61.0)
     - ReactCommon/jscallinvoker (= 0.61.0)
-  - RNZoomUsBridge (0.0.1):
+  - RNZoomUsBridge (0.0.4):
     - React
   - Yoga (1.14.0)
   - ZoomSDK (4.6.15805.0403)
@@ -345,7 +345,7 @@ SPEC CHECKSUMS:
   React-RCTText: beb19a6c50072a1a2f617490ea967237c98d1dfc
   React-RCTVibration: c8e67f140a83a14a1ad9042950cca08ab29423fd
   ReactCommon: 584ef683c340894c1c82be43ce760390493ae8bf
-  RNZoomUsBridge: a9f184fdee18823602fef1f5cf9df74dd9ab7e81
+  RNZoomUsBridge: 1ee903f4a620d1251fa7205d168d4f83b232f27a
   Yoga: 3f70bbd9aa01e04eefec36e2a085b2fc0ff1dd98
   ZoomSDK: 9480ad5a2e0fbb01c4df220648d45db97d579374
 
