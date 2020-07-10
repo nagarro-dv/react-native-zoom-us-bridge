@@ -104,6 +104,7 @@ RCT_EXPORT_METHOD(
   joinMeeting:(NSString *)meetingNumber
   userName:(NSString *)userName
   password:(NSString *)password
+  meetingUrl: (NSString *)meetingUrl
   withResolve: (RCTPromiseResolveBlock)resolve
   withReject: (RCTPromiseRejectBlock)reject
 )
@@ -113,7 +114,7 @@ RCT_EXPORT_METHOD(
     meetingPromiseReject = reject;
 
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-      [[RNZoomUsManager sharedInstance] joinMeeting:meetingNumber userName:userName password:password completion:^(NSUInteger resultCode) {
+        [[RNZoomUsManager sharedInstance] joinMeeting:meetingNumber userName:userName password:password meetingUrl: meetingUrl completion:^(NSUInteger resultCode) {
         resolve(@{});
       }];
     }];
