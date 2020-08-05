@@ -77,7 +77,7 @@ pod install
 <details>
   <summary>Manual Link</summary>
 
-[Download zoom.us iOS SDK](https://github.com/zoom/zoom-sdk-ios)
+[Download zoom.us iOS SDK at https://github.com/zoom/zoom-sdk-ios](https://github.com/zoom/zoom-sdk-ios)
 
 1. Unzip the sdk and locate contents.
 2. Drag lib folder into the iOS Project
@@ -114,7 +114,7 @@ android.enableJetifier=true
 
 ***There are no semi-auto way to install the Android SDK at the moment. It must be done 100% manually.***
 
-[Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
+[Download zoom.us Android SDK at https://github.com/zoom/zoom-sdk-android](https://github.com/zoom/zoom-sdk-android)
 
 1. Unzip the sdk and locate `commonlib` and `mobilertc`.
 2. Drag both folders into your android project (Project/android)
