@@ -1,13 +1,15 @@
 # react-native-zoom-us-bridge
 This library bridges React Native with zoom.us SDK and implements the SDK authentication process.
 
+Library updated to use iOS SDK 5.0.24433.0616 and Android SDK version 5.0.24437.0708, or higher
+
 ***Note:  User login using zoom user accounts is not implemented.***
 
 ## Table of Contents
 
 * [Installation](#installation)
-  * [iOS](#ios-installation)
-  * [Android](#android-installation)
+  * [iOS](#ios-zoomus-sdk-installation)
+  * [Android](#android-zoomus-sdk-installation)
 * [Zoom Account Setup](#zoom-account-setup)
 * [Usage](#usage)
 * [Errors](#errors)
@@ -75,7 +77,7 @@ pod install
 <details>
   <summary>Manual Link</summary>
 
-[Download zoom.us iOS SDK](https://github.com/zoom/zoom-sdk-ios)
+[Download zoom.us iOS SDK at https://github.com/zoom/zoom-sdk-ios](https://github.com/zoom/zoom-sdk-ios)
 
 1. Unzip the sdk and locate contents.
 2. Drag lib folder into the iOS Project
@@ -112,11 +114,7 @@ android.enableJetifier=true
 
 ***There are no semi-auto way to install the Android SDK at the moment. It must be done 100% manually.***
 
-<details>
-  <summary>Manual Link</summary>
-
-[Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
-
+[Download zoom.us Android SDK at https://github.com/zoom/zoom-sdk-android](https://github.com/zoom/zoom-sdk-android)
 
 1. Unzip the sdk and locate `commonlib` and `mobilertc`.
 2. Drag both folders into your android project (Project/android)
@@ -143,7 +141,7 @@ android.enableJetifier=true
 
 
 See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-started/integration) for more information.
-</details>
+
 
 ## Zoom Account Setup
 
