@@ -1,1 +1,6 @@
 RNZoomUSBridgeExample
+android/build
+.github
+ios/RNZoomUsBridge.xcodeproj/project.xcworkspace/xcuserdata
+ios/RNZoomUsBridge.xcworkspace/xcuserdata
+ios/RNZoomUsBridge.xcodeproj/xcuserdata
