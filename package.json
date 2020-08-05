@@ -2,7 +2,7 @@
   "name": "@mokriya/react-native-zoom-us-bridge",
   "title": "React Native Zoom Us Bridge",
   "version": "0.0.6",
-  "description": "TODO",
+  "description": "A basic wrapper of Zoom US iOS/Android for React Native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
