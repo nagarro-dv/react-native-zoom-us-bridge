@@ -49,7 +49,6 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
         params.userID = userId;
         params.userType = MobileRTCUserType_APIUser;
         params.zak = userZak;
-        params.userToken = @"null";
 
         MobileRTCMeetError startMeetingResult = [ms startMeetingWithStartParam:params];
         NSLog(@"startMeeting, startMeetingResult=%d", startMeetingResult);
