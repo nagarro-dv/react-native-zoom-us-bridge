@@ -62,14 +62,13 @@ static RNZoomUsBridgeEventEmitter *internalEmitter = nil;
   MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
   if (ms) {
     ms.delegate = self;
+      
+    MobileRTCMeetingJoinParam * joinParam = [[MobileRTCMeetingJoinParam alloc]init];
+    joinParam.userName = userName;
+    joinParam.meetingNumber = meetingId;
+    joinParam.password = password ? password : @"";
 
-    NSDictionary *paramDict = @{
-    kMeetingParam_Username: userName,
-    kMeetingParam_MeetingNumber: meetingId,
-    kMeetingParam_MeetingPassword: password ? password : @""
-    };
-
-    MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithDictionary:paramDict];
+    MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithJoinParam:joinParam];
     NSLog(@"joinMeeting, joinMeetingResult=%d", joinMeetingResult);
     completion(1);
   }
