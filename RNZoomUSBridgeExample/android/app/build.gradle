@@ -182,6 +182,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.android.material:material:+'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
