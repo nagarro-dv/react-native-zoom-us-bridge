@@ -1,13 +1,15 @@
 # react-native-zoom-us-bridge
 This library bridges React Native with zoom.us SDK and implements the SDK authentication process.
 
+Library updated to use iOS SDK 5.0.24433.0616 and Android SDK version 5.0.24437.0708, or higher
+
 ***Note:  User login using zoom user accounts is not implemented.***
 
 ## Table of Contents
 
 * [Installation](#installation)
-  * [iOS](#ios-installation)
-  * [Android](#android-installation)
+  * [iOS](#ios-zoomus-sdk-installation)
+  * [Android](#android-zoomus-sdk-installation)
 * [Zoom Account Setup](#zoom-account-setup)
 * [Usage](#usage)
 * [Errors](#errors)
@@ -28,9 +30,18 @@ or
 yarn add @mokriya/react-native-zoom-us-bridge
 ```
 
-Then follow the instructions for your platform to link into your project:
+### Linking
+Library autolinks for React-Native 60 or higher.
 
-### iOS installation
+RN 59 or lower please make sure to
+```sh
+react-native link @mokriya/react-native-zoom-us-bridge
+```
+
+Then follow the instructions for your platform to add ZoomUS SDK into your project:
+
+
+### iOS ZoomUS SDK installation
 
 <details>
   <summary>Using CocoaPods</summary>
@@ -66,7 +77,7 @@ pod install
 <details>
   <summary>Manual Link</summary>
 
-[Download zoom.us iOS SDK](https://github.com/zoom/zoom-sdk-ios)
+[Download zoom.us iOS SDK at https://github.com/zoom/zoom-sdk-ios](https://github.com/zoom/zoom-sdk-ios)
 
 1. Unzip the sdk and locate contents.
 2. Drag lib folder into the iOS Project
@@ -94,15 +105,16 @@ Zoom SDK library does not support bitcode. Please make sure to set bitcode to `N
 The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMicrophoneUsageDescription` with a description explaining clearly why your app needs access to the camera and microphone, otherwise Apple will reject your app submission.
 
 
-### Android installation
+### Android ZoomUS SDK installation
+If you are using RN 59 or lower, you will need to enable Android X. Add this to your `gradle.properties`
+```
+android.useAndroidX=true
+android.enableJetifier=true
+```
 
 ***There are no semi-auto way to install the Android SDK at the moment. It must be done 100% manually.***
 
-<details>
-  <summary>Manual Link</summary>
-
-[Download zoom.us Android SDK at](https://github.com/zoom/zoom-sdk-android)
-
+[Download zoom.us Android SDK at https://github.com/zoom/zoom-sdk-android](https://github.com/zoom/zoom-sdk-android)
 
 1. Unzip the sdk and locate `commonlib` and `mobilertc`.
 2. Drag both folders into your android project (Project/android)
@@ -129,7 +141,7 @@ The app's `Info.plist` file must contain a `NSCameraUsageDescription` and `NSMic
 
 
 See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-started/integration) for more information.
-</details>
+
 
 ## Zoom Account Setup
 
@@ -148,7 +160,7 @@ You should avoid hardcoding your App/Jwt key and secret. In our example we hardc
 ### Basic joining meeting
 **APP key and secret is required**
 ```javascript
-import RNZoomUsBridge from 'react-native-zoom-us-bridge';
+import RNZoomUsBridge from '@mokriya/react-native-zoom-us-bridge';
 
 RNZoomUsBridge.initialize(
   ZOOM_APP_KEY,
@@ -166,7 +178,7 @@ RNZoomUsBridge.joinMeeting(
 **JWT key and secret is required**
 
 ```javascript
-import RNZoomUsBridge from 'react-native-zoom-us-bridge';
+import RNZoomUsBridge from '@mokriya/react-native-zoom-us-bridge';
 
 RNZoomUsBridge.initialize(
   ZOOM_APP_KEY,
@@ -203,7 +215,7 @@ RNZoomUsBridge.startMeeting(
 ### Events from zoom sdk
 Use event emitter to listen for meeting state changes
 ```javascript
-import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from 'react-native-zoom-us-bridge';
+import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from '@mokriya/react-native-zoom-us-bridge';
 
 const meetingEventEmitter = new NativeEventEmitter(RNZoomUsBridgeEventEmitter);
 

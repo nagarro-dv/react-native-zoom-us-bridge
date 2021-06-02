@@ -19,7 +19,7 @@ import {
   NativeEventEmitter
 } from 'react-native';
 
-import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from 'react-native-zoom-us-bridge';
+import RNZoomUsBridge, {RNZoomUsBridgeEventEmitter} from '@mokriya/react-native-zoom-us-bridge';
 
 const ZOOM_APP_KEY = "";
 const ZOOM_APP_SECRET = "";
