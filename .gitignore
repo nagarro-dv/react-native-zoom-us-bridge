@@ -35,8 +35,16 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # BUCK
 buck-out/
 \.buckd/
 *.keystore
+
+# Temp ignore
+RNZoomUSBridgeExampleBk/
+MobileRTC.xcframework/
+MobileRTCResources.bundle/
+commonlib/
+mobilertc/

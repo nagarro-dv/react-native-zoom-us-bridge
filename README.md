@@ -1,7 +1,7 @@
 # react-native-zoom-us-bridge
 This library bridges React Native with zoom.us SDK and implements the SDK authentication process.
 
-Library updated to use iOS SDK 5.0.24433.0616 and Android SDK version 5.0.24437.0708, or higher
+Library updated to use iOS SDK 5.5.12511.0421 and Android SDK version 5.5.1.1319, or higher
 
 ***Note:  User login using zoom user accounts is not implemented.***
 
@@ -31,7 +31,7 @@ yarn add @mokriya/react-native-zoom-us-bridge
 ```
 
 ### Linking
-Library autolinks for React-Native 60 or higher.
+Library Autolinks for React-Native 60 or higher.
 
 RN 59 or lower please make sure to
 ```sh
@@ -43,43 +43,11 @@ Then follow the instructions for your platform to add ZoomUS SDK into your proje
 
 ### iOS ZoomUS SDK installation
 
-<details>
-  <summary>Using CocoaPods</summary>
+Manual Link is the only way. Zoom changed the way iOS SDK is packaged, and its no longer possible to use Cocoapods.
 
-Due to the size of the sdk you will need to enable [git lfs](https://help.github.com/en/github/managing-large-files/installing-git-large-file-storage)
+[Download zoom.us iOS SDK at https://marketplace.zoom.us](https://marketplace.zoom.us)
 
-```sh
-brew install git-lfs
-git lfs install
-```
-
-Setup your Podfile by adding this line inside of your app target (found at ios/Podfile).
-
-```ruby
-pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git'
-```
-
-***Note***: This particular pod cannot be used for release build. You must use the production Pod instead. However, this pod file does not work with simulators.
-
-Then run in the ios folder
-
-```sh
-pod install
-```
-
-### Production Zoom.us SDK
-
-```ruby
-`pod 'ZoomSDK', :git => 'https://github.com/mokriya-org/zoom-us-ios-sdk-pod.git'`
-```
-</details>
-
-<details>
-  <summary>Manual Link</summary>
-
-[Download zoom.us iOS SDK at https://github.com/zoom/zoom-sdk-ios](https://github.com/zoom/zoom-sdk-ios)
-
-1. Unzip the sdk and locate contents.
+1. Unzip the SDK and locate contents.
 2. Drag lib folder into the iOS Project
     ![](./assets/ios_image1.jpg)
 3. Make sure to check `copy if needed`
@@ -93,7 +61,6 @@ pod install
     ![](./assets/ios_image6.jpg)
 
 See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/iOS/getting-started/integration) for more information.
-</details>
 
 ### Bitcode
 
@@ -116,31 +83,54 @@ android.enableJetifier=true
 
 [Download zoom.us Android SDK at https://github.com/zoom/zoom-sdk-android](https://github.com/zoom/zoom-sdk-android)
 
-1. Unzip the sdk and locate `commonlib` and `mobilertc`.
+1. Unzip the SDK and locate `commonlib` and `mobilertc`.
 2. Drag both folders into your android project (Project/android)
-    ![](./assets/android_image1.jpg)
-    ![](./assets/android_image2.jpg)
-3. Open `android/settings.gradle`
-4. Add the following string `, ':mobilertc', ':commonlib'` into the `include ':app'`
-    ![](./assets/android_image3.jpg)
-5. Open `android/build.gradle`
-6. Update your SDK versions to match the following
+![](./assets/android_image1.jpg)
+![](./assets/android_image2.jpg)
 
+3. Open `android/settings.gradle`
+     - Add the following lines after `include ':app'`
+    ```
+    include ':mobilertc'
+    include ':commonlib'
+    ```
+![](./assets/android_image3.jpg)
+
+4. Open `android/build.gradle`
+     - Update your SDK versions to match the following or higher
     ```groovy
         buildToolsVersion = "29.0.0"
         minSdkVersion = 21
         compileSdkVersion = 29
-        targetSdkVersion = 28
+        targetSdkVersion = 29
+    ```
+![](./assets/android_image4.jpg)
+
+5. Open `android/app/build.gradle`
+   - Add `multiDexEnabled true` into `defaultConfig`
+![](./assets/android_image5.jpg)
+   - Add these lines after `compileOptions {}`
+   ```
+   packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+    }
+    ```
+   - Add these lines to `dependencies`
+    ```
+    implementation project(':commonlib')
+    implementation project(':mobilertc')
     ```
 
-   ![](./assets/android_image4.jpg)
+6. Open `MainApplication.java`
+    - Add `SoLoader.loadLibrary("zoom");` right under `SoLoader.init(this, /* native exopackage */ false);` this is done to fix the `bad_cast` error 
 
-8. Open `android/app/build.gradle`
-9. Add `multiDexEnabled true` into `defaultConfig`
-    ![](./assets/android_image5.jpg)
+7. Run script to fix issues with `cannot locate symbol "__cxa_bad_typeid"` due to `libc++_shared.so`. Please do this after you have copied the `mobilertc.aar` to the correct folder
+    - From root of project folder, execute `./node_modules/react-native-zoom-us-bridge/scripts/mobilertc-precompile.sh`
 
-
-See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-started/integration) for more information.
+See [here](https://marketplace.zoom.us/docs/sdk/native-sdks/android/getting-started/integration) for more information on android integration.
 
 
 ## Zoom Account Setup
