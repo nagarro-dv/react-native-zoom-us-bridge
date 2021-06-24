@@ -26,8 +26,6 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -37,18 +35,16 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>We need bluetooth access</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>We need bluetooth access</string>
+	<string>We will use your Bluetooth to access your Bluetooth headphones.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>we need your camera</string>
+	<string>For people to see you during meetings, we need access to your camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>we need your location</string>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>we need your mic</string>
+	<string>For people to hear you during meetings, we need access to your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>we need your photo libs</string>
+	<string>For people to share, we need access to your photos</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -58,6 +54,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
