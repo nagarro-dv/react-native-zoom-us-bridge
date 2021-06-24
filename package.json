@@ -1,5 +1,5 @@
 {
-  "name": "react-native-zoom-us-bridge",
+  "name": "@mokriya/react-native-zoom-us-bridge",
   "title": "React Native Zoom Us Bridge",
   "version": "0.0.9",
   "description": "A basic wrapper of Zoom US iOS/Android for React Native",

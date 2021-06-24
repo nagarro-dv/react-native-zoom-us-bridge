@@ -19,7 +19,7 @@ import {
 
 import RNZoomUsBridge, {
   RNZoomUsBridgeEventEmitter,
-} from 'react-native-zoom-us-bridge';
+} from '@mokriya/react-native-zoom-us-bridge';
 
 // YOU WILL NEED TO SET THIS
 const ZOOM_SDK_KEY = '';
