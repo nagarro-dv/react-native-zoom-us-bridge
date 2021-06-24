@@ -1,7 +1,7 @@
 {
-  "name": "@mokriya/react-native-zoom-us-bridge",
+  "name": "react-native-zoom-us-bridge",
   "title": "React Native Zoom Us Bridge",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "A basic wrapper of Zoom US iOS/Android for React Native",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mokriya-org/react-native-zoom-us-bridge.git",
-    "baseUrl": "https://github.com/mokriya-org/react-native-zoom-us-bridge"
+    "url": "git+https://github.com/nagarro-dv/react-native-zoom-us-bridge.git",
+    "baseUrl": "https://github.com/nagarro-dv/react-native-zoom-us-bridge"
   },
   "keywords": [
     "react",
@@ -18,7 +18,7 @@
     "zoom",
     "zoom sdk"
   ],
-  "author": "Mokriya <info@mokriya.com>",
+  "author": "Nagarro <jim.ji@nagarro.com>",
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "peerDependencies": {
@@ -30,7 +30,7 @@
     "react-native": "^0.61.5"
   },
   "bugs": {
-    "url": "https://github.com/mokriya-org/react-native-zoom-us-bridge/issues"
+    "url": "https://github.com/nagarro-dv/react-native-zoom-us-bridge/issues"
   },
-  "homepage": "https://github.com/mokriya-org/react-native-zoom-us-bridge#readme"
+  "homepage": "https://github.com/nagarro-dv/react-native-zoom-us-bridge#readme"
 }
