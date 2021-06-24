@@ -3,37 +3,54 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		4643DFCDD202195A60A5EF95 /* libPods-RNZoomUSBridgeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B1B023182D9C91A0144B7E /* libPods-RNZoomUSBridgeExample.a */; };
+		3C1AF8E92683EE0D0018AC29 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AF8E72683EE0D0018AC29 /* MobileRTCResources.bundle */; };
+		3C1AF8EA2683EE240018AC29 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AF8E62683EE0D0018AC29 /* MobileRTC.xcframework */; };
+		3C1AF8EB2683EE240018AC29 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AF8E62683EE0D0018AC29 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3CFB1C9526830E51003A809B /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFB1C9426830E51003A809B /* Fix.swift */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A54D122A388AA8D2BE8F379B /* libPods-RNZoomUSBridgeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F0C53B9EDC60F253FD7C40D /* libPods-RNZoomUSBridgeExample.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3CFB1C9226830C11003A809B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3C1AF8EB2683EE240018AC29 /* MobileRTC.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		06805795E5F8AFC2F4757B0E /* Pods-RNZoomUSBridgeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* RNZoomUSBridgeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNZoomUSBridgeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RNZoomUSBridgeExample/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = RNZoomUSBridgeExample/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RNZoomUSBridgeExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNZoomUSBridgeExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNZoomUSBridgeExample/main.m; sourceTree = "<group>"; };
-		1A463D17BE98F419C8FC3761 /* Pods-RNZoomUSBridgeExample-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-tvOS/Pods-RNZoomUSBridgeExample-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		3B2F37863732331EDC9763AC /* Pods-RNZoomUSBridgeExample-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-tvOSTests/Pods-RNZoomUSBridgeExample-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		530430179063E3F42CAAD5BF /* Pods-RNZoomUSBridgeExample-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-tvOS/Pods-RNZoomUSBridgeExample-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		56B72C632ABB8BDDDBD11D61 /* Pods-RNZoomUSBridgeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExampleTests/Pods-RNZoomUSBridgeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		91A70DC03E1625D8442CA6A9 /* Pods-RNZoomUSBridgeExample-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-tvOSTests/Pods-RNZoomUSBridgeExample-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		959EEE10DBB2C53378C0A459 /* Pods-RNZoomUSBridgeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample.release.xcconfig"; sourceTree = "<group>"; };
-		D4B1B023182D9C91A0144B7E /* libPods-RNZoomUSBridgeExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNZoomUSBridgeExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1AF8E62683EE0D0018AC29 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = ZoomSDK/MobileRTC.xcframework; sourceTree = "<group>"; };
+		3C1AF8E72683EE0D0018AC29 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = ZoomSDK/MobileRTCResources.bundle; sourceTree = "<group>"; };
+		3CFB1C9326830E51003A809B /* RNZoomUSBridgeExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNZoomUSBridgeExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		3CFB1C9426830E51003A809B /* Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fix.swift; sourceTree = "<group>"; };
+		53B65F39FE7E33D82C5EDE15 /* libPods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AC22709AC55BB04317C679D /* Pods-RNZoomUSBridgeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample.release.xcconfig"; sourceTree = "<group>"; };
+		7F0C53B9EDC60F253FD7C40D /* libPods-RNZoomUSBridgeExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNZoomUSBridgeExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RNZoomUSBridgeExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9C8B0C9E9F454192D641845E /* Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests/Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB8204B2A565913AB1986D94 /* Pods-RNZoomUSBridgeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample.debug.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample.debug.xcconfig"; sourceTree = "<group>"; };
+		BC4FA9E27D9AAE47C0EB8A37 /* Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests/Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FC3165D07AE0EBAFD7285142 /* Pods-RNZoomUSBridgeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNZoomUSBridgeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-RNZoomUSBridgeExampleTests/Pods-RNZoomUSBridgeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4643DFCDD202195A60A5EF95 /* libPods-RNZoomUSBridgeExample.a in Frameworks */,
+				A54D122A388AA8D2BE8F379B /* libPods-RNZoomUSBridgeExample.a in Frameworks */,
+				3C1AF8EA2683EE240018AC29 /* MobileRTC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,13 +69,14 @@
 		13B07FAE1A68108700A75B9A /* RNZoomUSBridgeExample */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				3CFB1C9426830E51003A809B /* Fix.swift */,
+				3CFB1C9326830E51003A809B /* RNZoomUSBridgeExample-Bridging-Header.h */,
 			);
 			name = RNZoomUSBridgeExample;
 			sourceTree = "<group>";
@@ -66,15 +85,28 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				D4B1B023182D9C91A0144B7E /* libPods-RNZoomUSBridgeExample.a */,
+				7F0C53B9EDC60F253FD7C40D /* libPods-RNZoomUSBridgeExample.a */,
+				53B65F39FE7E33D82C5EDE15 /* libPods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61FEDB9CDA0C2AFD1C3DA9C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB8204B2A565913AB1986D94 /* Pods-RNZoomUSBridgeExample.debug.xcconfig */,
+				5AC22709AC55BB04317C679D /* Pods-RNZoomUSBridgeExample.release.xcconfig */,
+				9C8B0C9E9F454192D641845E /* Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.debug.xcconfig */,
+				BC4FA9E27D9AAE47C0EB8A37 /* Pods-RNZoomUSBridgeExample-RNZoomUSBridgeExampleTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3C1AF8E62683EE0D0018AC29 /* MobileRTC.xcframework */,
+				3C1AF8E72683EE0D0018AC29 /* MobileRTCResources.bundle */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -86,7 +118,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				C0CA05D2AF908032E66B0939 /* Pods */,
+				61FEDB9CDA0C2AFD1C3DA9C5 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -101,21 +133,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C0CA05D2AF908032E66B0939 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				06805795E5F8AFC2F4757B0E /* Pods-RNZoomUSBridgeExample.debug.xcconfig */,
-				959EEE10DBB2C53378C0A459 /* Pods-RNZoomUSBridgeExample.release.xcconfig */,
-				1A463D17BE98F419C8FC3761 /* Pods-RNZoomUSBridgeExample-tvOS.debug.xcconfig */,
-				530430179063E3F42CAAD5BF /* Pods-RNZoomUSBridgeExample-tvOS.release.xcconfig */,
-				3B2F37863732331EDC9763AC /* Pods-RNZoomUSBridgeExample-tvOSTests.debug.xcconfig */,
-				91A70DC03E1625D8442CA6A9 /* Pods-RNZoomUSBridgeExample-tvOSTests.release.xcconfig */,
-				56B72C632ABB8BDDDBD11D61 /* Pods-RNZoomUSBridgeExampleTests.debug.xcconfig */,
-				FC3165D07AE0EBAFD7285142 /* Pods-RNZoomUSBridgeExampleTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,13 +140,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RNZoomUSBridgeExample" */;
 			buildPhases = (
-				B7BE8C52DDEF8B1521D588A2 /* [CP] Check Pods Manifest.lock */,
+				3D5080A7261D86DE8C6B01A0 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				67EA2BF7CA53957E111A965C /* [CP] Copy Pods Resources */,
+				351217401919C66E88F25087 /* [CP] Copy Pods Resources */,
+				3CFB1C9226830C11003A809B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -146,20 +164,18 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = Facebook;
+				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 6UV365U9Z9;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RNZoomUSBridgeExample" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -178,8 +194,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				3C1AF8E92683EE0D0018AC29 /* MobileRTCResources.bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,27 +215,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		67EA2BF7CA53957E111A965C /* [CP] Copy Pods Resources */ = {
+		351217401919C66E88F25087 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-resources.sh",
-				"${PODS_ROOT}/ZoomSDK/MobileRTCResources.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MobileRTCResources.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNZoomUSBridgeExample/Pods-RNZoomUSBridgeExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7BE8C52DDEF8B1521D588A2 /* [CP] Check Pods Manifest.lock */ = {
+		3D5080A7261D86DE8C6B01A0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,114 +283,73 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				3CFB1C9526830E51003A809B /* Fix.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = RNZoomUSBridgeExample;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06805795E5F8AFC2F4757B0E /* Pods-RNZoomUSBridgeExample.debug.xcconfig */;
+			baseConfigurationReference = AB8204B2A565913AB1986D94 /* Pods-RNZoomUSBridgeExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 6UV365U9Z9;
+				DEVELOPMENT_TEAM = CUJ9F386D8;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/ZoomSDK\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
-					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
-					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
-					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
-					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
-					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
-					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
-					"\"${PODS_ROOT}/Headers/Public/glog\"",
-					"\"${PODS_ROOT}/Headers/Public/react-native-zoom-us-bridge\"",
-					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = RNZoomUSBridgeExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pengji.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.looptifyapp.test;
 				PRODUCT_NAME = RNZoomUSBridgeExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RNZoomUSBridgeExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 959EEE10DBB2C53378C0A459 /* Pods-RNZoomUSBridgeExample.release.xcconfig */;
+			baseConfigurationReference = 5AC22709AC55BB04317C679D /* Pods-RNZoomUSBridgeExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6UV365U9Z9;
+				DEVELOPMENT_TEAM = CUJ9F386D8;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/ZoomSDK\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
-					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
-					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
-					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
-					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
-					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
-					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
-					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
-					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
-					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
-					"\"${PODS_ROOT}/Headers/Public/glog\"",
-					"\"${PODS_ROOT}/Headers/Public/react-native-zoom-us-bridge\"",
-					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = RNZoomUSBridgeExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pengji.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.looptifyapp.test;
 				PRODUCT_NAME = RNZoomUSBridgeExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RNZoomUSBridgeExample-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -383,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -401,6 +377,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -410,6 +387,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -426,6 +404,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -436,6 +423,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -454,6 +442,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -463,6 +452,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -472,6 +462,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
