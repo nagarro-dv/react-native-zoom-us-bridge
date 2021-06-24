@@ -22,10 +22,10 @@ import RNZoomUsBridge, {
 } from 'react-native-zoom-us-bridge';
 
 // YOU WILL NEED TO SET THIS
-const ZOOM_SDK_KEY = '0pwMOPLd6vyl6a4mFo3ZMs10uy90TGKIw0c2';
-const ZOOM_SDK_SECRET = 'j4zdEbKiLgktXxCLAh1SRIrsydFUJ2JjDaeL';
-const ZOOM_JWT_API_KEY = 'oEdfAdW4RGaxThkQSBkrqg';
-const ZOOM_JWT_API_SECRET = 'OPZcOGgEramfl67GYBlygWP3rkyuXPi7zaqQ';
+const ZOOM_SDK_KEY = '';
+const ZOOM_SDK_SECRET = '';
+const ZOOM_JWT_API_KEY = '';
+const ZOOM_JWT_API_SECRET = '';
 
 const initialState = {
   meetingId: '',
