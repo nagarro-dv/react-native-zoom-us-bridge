@@ -128,7 +128,7 @@ android.enableJetifier=true
     - Add `SoLoader.loadLibrary("zoom");` right under `SoLoader.init(this, /* native exopackage */ false);` this is done to fix the `bad_cast` error 
 
 7. Run script to fix issues with `cannot locate symbol "__cxa_bad_typeid"` due to `libc++_shared.so`. Please do this after you have copied the `mobilertc.aar` to the correct folder
-    - From root of project folder, execute `./node_modules/react-native-zoom-us-bridge/scripts/mobilertc-precompile.sh`
+    - From root of project folder, execute `./node_modules/@mokriya/react-native-zoom-us-bridge/scripts/mobilertc-precompile.sh`
 
 Steps 6 and 7 must be done due to an issue with the Zoom Android SDK having an incompatible version of `lib++_shared.so`. Shoutout and kudos to [**Stefan Majiros**](https://stefan-majiros.com) for documenting crucial steps on getting the `mobilertc.aar` library to build. Without his insights this would have been impossible. [Blog post](https://stefanmajiros.medium.com/how-to-integrate-zoom-sdk-into-react-native-47492d4e46a6)
 
