@@ -14,8 +14,10 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
+import us.zoom.sdk.MeetingParameter;
 import us.zoom.sdk.ZoomSDK;
 import us.zoom.sdk.ZoomError;
+import us.zoom.sdk.ZoomSDKInitParams;
 import us.zoom.sdk.ZoomSDKInitializeListener;
 
 import us.zoom.sdk.MeetingStatus;
@@ -74,8 +76,10 @@ public class RNZoomUsBridgeModule extends ReactContextBaseJavaModule implements 
             @Override
             public void run() {
                 ZoomSDK zoomSDK = ZoomSDK.getInstance();
-
-                zoomSDK.initialize(reactContext.getCurrentActivity(), appKey, appSecret, RNZoomUsBridgeModule.this);
+                ZoomSDKInitParams params = new ZoomSDKInitParams();
+                params.appKey = appKey;
+                params.appSecret = appSecret;
+                zoomSDK.initialize(reactContext.getCurrentActivity(), RNZoomUsBridgeModule.this, params);
             }
         });
         } catch (Exception ex) {
@@ -163,27 +167,31 @@ public class RNZoomUsBridgeModule extends ReactContextBaseJavaModule implements 
     ) {
         try {
         meetingPromise = promise;
+            reactContext.getCurrentActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ZoomSDK zoomSDK = ZoomSDK.getInstance();
+                    if (!zoomSDK.isInitialized()) {
+                        promise.reject("ERR_ZOOM_JOIN", "ZoomSDK has not been initialized successfully");
+                        return;
+                    }
 
-        ZoomSDK zoomSDK = ZoomSDK.getInstance();
-        if(!zoomSDK.isInitialized()) {
-            promise.reject("ERR_ZOOM_JOIN", "ZoomSDK has not been initialized successfully");
-            return;
-        }
+                    final MeetingService meetingService = zoomSDK.getMeetingService();
 
-        final MeetingService meetingService = zoomSDK.getMeetingService();
+                    JoinMeetingOptions opts = new JoinMeetingOptions();
+                    JoinMeetingParams params = new JoinMeetingParams();
+                    params.displayName = displayName;
+                    params.meetingNo = meetingNo;
+                    params.password = meetingPassword;
 
-        JoinMeetingOptions opts = new JoinMeetingOptions();
-        JoinMeetingParams params = new JoinMeetingParams();
-        params.displayName = displayName;
-        params.meetingNo = meetingNo;
-        params.password = meetingPassword;
+                    int joinMeetingResult = meetingService.joinMeetingWithParams(reactContext.getCurrentActivity(), params, opts);
+                    Log.i(TAG, "joinMeeting, joinMeetingResult=" + joinMeetingResult);
 
-        int joinMeetingResult = meetingService.joinMeetingWithParams(reactContext.getCurrentActivity(), params, opts);
-        Log.i(TAG, "joinMeeting, joinMeetingResult=" + joinMeetingResult);
-
-        if (joinMeetingResult != MeetingError.MEETING_ERROR_SUCCESS) {
-            promise.reject("ERR_ZOOM_JOIN", "joinMeeting, errorCode=" + joinMeetingResult);
-        }
+                    if (joinMeetingResult != MeetingError.MEETING_ERROR_SUCCESS) {
+                        promise.reject("ERR_ZOOM_JOIN", "joinMeeting, errorCode=" + joinMeetingResult);
+                    }
+                }
+            });
         } catch (Exception ex) {
         promise.reject("ERR_UNEXPECTED_EXCEPTION", ex);
         }
@@ -235,6 +243,11 @@ public class RNZoomUsBridgeModule extends ReactContextBaseJavaModule implements 
         params.putString("eventProperty", "onMeetingStatusChanged, meetingStatus=" + meetingStatus + ", errorCode=" + errorCode + ", internalErrorCode=" + internalErrorCode);
         sendEvent(reactContext, "meetingStatusChanged", params);
         }
+    }
+
+    @Override
+    public void onMeetingParameterNotification(MeetingParameter meetingParameter) {
+
     }
 
     private void registerListener() {

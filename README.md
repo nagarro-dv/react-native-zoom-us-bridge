@@ -1,7 +1,7 @@
 # react-native-zoom-us-bridge
 This library bridges React Native with zoom.us SDK and implements the SDK authentication process.
 
-Library updated to use iOS SDK 5.5.12511.0421 and Android SDK version 5.5.1.1319, or higher
+Library updated to use iOS SDK v5.12.2.4959 and Android SDK version v5.12.2.9109, or higher
 
 ***Note:  User login using zoom user accounts is not implemented.***
 
